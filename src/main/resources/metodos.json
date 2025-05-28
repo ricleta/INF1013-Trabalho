@@ -1,0 +1,11 @@
+[
+    {
+        "metodo": "cartao_credito"
+    },
+    {
+        "metodo": "cartao_debito"
+    },
+    {
+        "metodo": "PIX"
+    }
+]

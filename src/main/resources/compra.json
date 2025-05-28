@@ -1,0 +1,51 @@
+[
+    {
+        "desconto": 0.1,
+        "id_usuario": 1,
+        "id_presenteado": 2,
+        
+        "carrinho":
+        [
+            {
+                "id_jogo": 1,
+                "preco": 59.99
+            },
+            {
+                "id_jogo": 2,
+                "preco": 49.99
+            }
+        ],
+
+        "pagamento":
+        {
+            "identificacao_pagamento": "SF7-B49-M2I",
+            "total_a_pagar": 109.98,
+            "numero_controle": "1234567890123456",
+            "timestamp": "UTC2023-01-01 12:00:00",
+            "metodo": "cartao"
+        }
+    },
+
+    {
+        "desconto": 0.1,
+        "id_usuario": 3,
+        "id_presenteado": "",
+        
+        "carrinho":
+        [
+            {
+                "id_jogo": 1,
+                "preco": 59.99
+            }
+        ],
+
+        "pagamento":
+         {
+            "identificacao_pagamento": "SF7-B49-M2I",
+            "total_a_pagar": 59.99,
+            "numero_controle": "1234567890123456",
+            "timestamp": "UTC2023-01-01 12:00:00",
+            "metodo": "PIX"
+        }
+    }
+]

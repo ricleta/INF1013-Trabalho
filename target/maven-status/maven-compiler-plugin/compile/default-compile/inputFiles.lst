@@ -1,2 +1,12 @@
+/workspaces/INF1013-Trabalho/src/main/java/gameshop/models/Jogo.java
+/workspaces/INF1013-Trabalho/src/main/java/gameshop/models/Avaliacao.java
+/workspaces/INF1013-Trabalho/src/main/java/gameshop/models/enums/EnumControle.java
+/workspaces/INF1013-Trabalho/src/main/java/gameshop/models/enums/EnumOS.java
+/workspaces/INF1013-Trabalho/src/main/java/gameshop/ui/TelaLogin.java
+/workspaces/INF1013-Trabalho/src/main/java/gameshop/models/JogoCarrinhoUsuario.java
+/workspaces/INF1013-Trabalho/src/main/java/gameshop/models/Usuario.java
+/workspaces/INF1013-Trabalho/src/main/java/gameshop/models/enums/EnumPlataforma.java
 /workspaces/INF1013-Trabalho/src/main/java/gameshop/Main.java
+/workspaces/INF1013-Trabalho/src/main/java/gameshop/models/JogoBibliotecaUsuario.java
 /workspaces/INF1013-Trabalho/src/main/java/gameshop/ui/TelaPrincipal.java
+/workspaces/INF1013-Trabalho/src/main/java/gameshop/models/JSONReader.java

@@ -1,0 +1,22 @@
+[
+    {
+        "id_evento": 1,
+        "nome_evento": "Evento 1",
+
+        "jogos_oferecidos":
+        [
+            {
+                "id_jogo": 1,
+                "preco": 59.99,
+                "data_inicio": "2023-01-01",
+                "data_fim": "2023-01-31"
+            },
+            {
+                "id_jogo": 1,
+                "preco": 59.99,
+                "data_inicio": "2023-02-01",
+                "data_fim": "2023-02-05"
+            }
+        ]
+    }
+]

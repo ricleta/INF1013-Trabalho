@@ -1,0 +1,16 @@
+[
+    {
+        "pontuacao": 3,
+        "texto": "O jogo é incrível, mas a história poderia ser melhor.",
+
+        "id_jogo": 1,
+        "id_usuario": 1
+    },
+    {
+        "pontuacao": 5,
+        "texto": "Uma obra-prima! Gráficos e jogabilidade excepcionais.",
+
+        "id_jogo": 1,
+        "id_usuario": 2
+    }
+]

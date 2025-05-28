@@ -1,0 +1,40 @@
+[
+    {
+        "id_usuario": 1,
+        "username": "irineu",
+        "email": "blablabla@gmail.com",
+        "senha": "12345678",
+        "data_nascimento": "2000-01-01",
+        "amigos": [1, 2, 3],
+        "solicitacoes_pendentes": [4, 5],
+
+        "biblioteca":
+        [
+            {
+                "id_jogo": 1,
+                "horas_jogadas": 10.2,
+                "ultima_data_jogado": "2023-01-01",
+                "favorito": true,
+                "id_conquistas": [1, 2, 3]
+            },
+            {
+                "id_jogo": 2,
+                "horas_jogadas": 5,
+                "ultima_data_jogado": "2023-02-01",
+                "favorito": false,
+                "id_conquistas": [1, 2]
+            }
+        ],
+        "carrinhos":
+        [
+            {
+                "id_jogo": 1,
+                "preco": 59.99
+            },
+            {
+                "id_jogo": 2,
+                "preco": 49.99
+            }
+        ]
+    }
+]

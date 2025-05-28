@@ -54,7 +54,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>GameShop.Main</mainClass>
+                            <mainClass>gameshop.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

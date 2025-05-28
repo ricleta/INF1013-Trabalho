@@ -1,3 +1,45 @@
-{
-    "jogos": ["a", "b", "c", "d", "e", "f"]
-}
+[
+    {
+        "nome": "The Legend of Zelda: Breath of the Wild",
+        "plataformas": ["Nintendo Switch", "Wii U"],
+        "controles": ["PS5", "Xbox"],
+
+        "avaliacoes": ["avaliacao 1", "avaliacao 2", "avaliacao 3"],
+        "descricao_biblioteca":
+        [
+            {
+                "texto": "Descricao Zelda",
+                "iconce_path": "https://example.com/zelda_icon.png",
+                "sis_ops": ["Windows", "Linux"]
+            }
+        ],
+        "descricao_catalogo":
+        [
+            {
+                "texto": "Descricao Zelda",
+                "iconce_path": "https://example.com/zelda_icon.png",
+                "controles": ["xbox"],
+                "fotos_slide": [
+                    "https://example.com/zelda1.png",
+                    "https://example.com/zelda2.png",
+                    "https://example.com/zelda3.png"
+                ],
+                "sis_ops": ["Windows", "Linux"]
+            }
+        ],
+        "conquistas":[
+            {
+                "id_conquista": 1,
+                "conquista": "Derrote o Boss Final",
+                "icone": "path",
+                "dificuldade": "Raro"
+            },
+            {
+                "id_conquista": 2,
+                "conquista": "Andar o mapa todo",
+                "icone": "path",
+                "dificuldade": "Comum"
+            }
+        ]
+    }
+]
