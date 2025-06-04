@@ -1,14 +1,80 @@
 package gameshop;
 
-import gameshop.ui.TelaLogin;
+import gameshop.models.Usuario;
+import gameshop.ui.TelaCatalogo;
+import gameshop.models.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // Inicia a aplicação
-        TelaLogin telaLogin = new TelaLogin();
-        telaLogin.setVisible(true);
+        // Usuario[] usuarios = JSONReader.readJSON(Usuario[].class, Main.class.getResourceAsStream("/usuarios.json"));
+        // final Usuario usuarioLogado = usuarios[0]; // Exemplo: usando o primeiro usuário do JSON
 
-        // ObjectMapper objectMapper = new ObjectMapper();
-        // Map<String, Object> map = objectMapper.readValue(new File("jogos.json"), new TypeReference<Map<String,Object>>(){});
+        Usuario usuarioLogado = createMockUsuario(); // Usando o mock de usuário para testes
+        
+        // Inicia a aplicação
+        TelaCatalogo telaCatalogo = new TelaCatalogo(usuarioLogado); // Exemplo: usando o primeiro usuário do JSON
+        telaCatalogo.setVisible(true);
+    }
+
+    public static Usuario createMockUsuario() {
+        // Mock data for basic user info
+        int idUsuario = 999;
+        String username = "MockUser";
+        String email = "mock.user@gameshop.com";
+        String senha = "mockpassword"; // In a real app, never store plain passwords
+        LocalDate dataNascimento = LocalDate.of(1990, 5, 15);
+
+        // Mock data for lists
+        List<Integer> amigos = new ArrayList<>();
+        amigos.add(101); // Example friend ID
+        amigos.add(102);
+
+        List<Integer> solicitacoesPendentes = new ArrayList<>();
+        solicitacoesPendentes.add(201); // Example pending request ID
+
+        List<JogoBibliotecaUsuario> biblioteca = new ArrayList<>();
+        // Add a mock game to the library
+        biblioteca.add(new JogoBibliotecaUsuario(
+                1, // idJogo
+                50.5, // horasJogadas
+                LocalDate.of(2024, 1, 20), // ultimaDataJogado
+                true, // favorito
+                new ArrayList<>(List.of(1, 2)) // idConquistas
+        ));
+        biblioteca.add(new JogoBibliotecaUsuario(
+                2, // idJogo
+                15.0, // horasJogadas
+                LocalDate.of(2024, 3, 10), // ultimaDataJogado
+                false, // favorito
+                new ArrayList<>(List.of(1)) // idConquistas
+        ));
+
+        List<JogoCarrinhoUsuario> carrinhos = new ArrayList<>();
+        // Add a mock game to the cart
+        carrinhos.add(new JogoCarrinhoUsuario(
+                3, // idJogo
+                29.99 // preco
+        ));
+        carrinhos.add(new JogoCarrinhoUsuario(
+                4, // idJogo
+                19.50 // preco
+        ));
+
+        // Create and return the mock Usuario object
+        return new Usuario(
+                idUsuario,
+                username,
+                email,
+                senha,
+                dataNascimento,
+                amigos,
+                solicitacoesPendentes,
+                biblioteca,
+                carrinhos
+        );
     }
 }
