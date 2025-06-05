@@ -1,8 +1,17 @@
 package gameshop.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class JogoCarrinhoUsuario {
+    @JsonProperty("id_jogo")
     private int idJogo;
+
+    @JsonProperty("preco")
     private double preco;
+
+    public JogoCarrinhoUsuario() {
+        // Construtor padrão
+    }
 
     public JogoCarrinhoUsuario(int idJogo, double preco) {
         this.idJogo = idJogo;

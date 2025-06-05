@@ -1,21 +1,25 @@
 package gameshop.models;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 public class JSONReader {
-    public static <T> T[] readJSON(Class<T[]> valueType, InputStream inputStream) {
+    
+    public static <T> T[] readJSON(String resourceName, Class<T[]> valueType) {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.findAndRegisterModules(); // Register modules for Java 8 date/time support
         T[] results = null;
 
-        try{
-            String text = new String(inputStream.readAllBytes(), "UTF-8");
-            results = objectMapper.readValue(text, valueType);
+        try (InputStream inputStream = JSONReader.class.getClassLoader().getResourceAsStream(resourceName)) {
+            if (inputStream == null) {
+                throw new IOException("Resource not found: " + resourceName);
+            }
+            results = objectMapper.readValue(inputStream, valueType);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return results;
     }
 

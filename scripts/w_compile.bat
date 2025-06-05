@@ -1,5 +1,5 @@
 cd ..
-mvn clean package -DskipTests
+wsl mvn clean package -DskipTests
 
 cd target
 

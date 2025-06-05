@@ -10,10 +10,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // Usuario[] usuarios = JSONReader.readJSON(Usuario[].class, Main.class.getResourceAsStream("/usuarios.json"));
-        // final Usuario usuarioLogado = usuarios[0]; // Exemplo: usando o primeiro usuário do JSON
+        Usuario[] usuarios = JSONReader.readJSON("usuarios.json", Usuario[].class);
+        final Usuario usuarioLogado = usuarios[0]; // Exemplo: usando o primeiro usuário do JSON
 
-        Usuario usuarioLogado = createMockUsuario(); // Usando o mock de usuário para testes
+        // Usuario usuarioLogado = createMockUsuario(); // Usando o mock de usuário para testes
         
         // Inicia a aplicação
         TelaCatalogo telaCatalogo = new TelaCatalogo(usuarioLogado); // Exemplo: usando o primeiro usuário do JSON

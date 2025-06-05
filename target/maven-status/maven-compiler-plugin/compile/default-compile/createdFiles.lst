@@ -1,8 +1,8 @@
 gameshop/models/Usuario.class
 gameshop/ui/TelaCatalogo.class
 gameshop/models/Avaliacao.class
-gameshop/models/JogoBibliotecaUsuario.class
 gameshop/models/enums/EnumPlataforma.class
+gameshop/models/JogoBibliotecaUsuario.class
 gameshop/models/enums/EnumOS.class
 gameshop/models/JogoCarrinhoUsuario.class
 gameshop/models/Jogo.class
