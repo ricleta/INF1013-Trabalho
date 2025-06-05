@@ -1,38 +1,27 @@
 package gameshop.models;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class JSONReader {
-    private String filePath;
 
-    public JSONReader(String filePath) {
-        this.filePath = filePath;
+    public JSONReader() {
     }
 
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        if (filePath == null || filePath.trim().isEmpty()) {
-            throw new IllegalArgumentException("O caminho do arquivo não pode ser vazio.");
-        }
-        this.filePath = filePath;
-    }
-
-    public <T> T[] readJSON(Class<T[]> valueType) {
+     public <T> T[] readJSON(String resourceName, Class<T[]> valueType) {
         ObjectMapper objectMapper = new ObjectMapper();
         T[] results = null;
 
-        try (FileInputStream inputStream = new FileInputStream(filePath)) {
-            String text = new String(inputStream.readAllBytes(), "UTF-8");
-            results = objectMapper.readValue(text, valueType);
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourceName)) {
+            if (inputStream == null) {
+                throw new IOException("Resource not found: " + resourceName);
+            }
+            results = objectMapper.readValue(inputStream, valueType);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return results;
     }
-
 }

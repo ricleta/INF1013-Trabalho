@@ -1,10 +1,22 @@
 package gameshop.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Avaliacao {
+    @JsonProperty("id_jogo") // Maps JSON "id_jogo" to idJogo
     private int idJogo;
+
+    @JsonProperty("id_usuario") // Maps JSON "id_usuario" to idUsuario
     private int idUsuario;
+
+    @JsonProperty("pontuacao") // Maps JSON "pontuacao" to nota
     private int nota;
+
+    @JsonProperty("texto") // Maps JSON "texto" to comentario
     private String comentario;
+
+    // Default constructor for Jackson deserialization
+    public Avaliacao() {}
 
     public Avaliacao(int idJogo, int idUsuario, int nota, String comentario) {
         this.idJogo = idJogo;
@@ -17,8 +29,16 @@ public class Avaliacao {
         return idJogo;
     }
 
+    public void setIdJogo(int idJogo) {
+        this.idJogo = idJogo;
+    }
+
     public int getIdUsuario() {
         return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public int getNota() {
@@ -41,5 +61,15 @@ public class Avaliacao {
             throw new IllegalArgumentException("O comentário não pode ser vazio.");
         }
         this.comentario = comentario;
+    }
+
+    @Override
+    public String toString() {
+        return "Avaliacao{" +
+               "idJogo=" + idJogo +
+               ", idUsuario=" + idUsuario +
+               ", nota=" + nota +
+               ", comentario='" + comentario + '\'' +
+               '}';
     }
 }

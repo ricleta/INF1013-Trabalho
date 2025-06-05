@@ -1,8 +1,5 @@
 package gameshop.models;
 
-import gameshop.models.JogoBibliotecaUsuario;
-import gameshop.models.JogoCarrinhoUsuario;
-
 import java.time.LocalDate;
 import java.util.List;
 

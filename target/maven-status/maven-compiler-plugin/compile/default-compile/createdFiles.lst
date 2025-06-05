@@ -4,6 +4,8 @@ gameshop/ui/TelaPrincipal$2.class
 gameshop/ui/TelaLogin.class
 gameshop/models/enums/EnumOS.class
 gameshop/models/JogoCarrinhoUsuario.class
+gameshop/models/DescricaoJogoBiblioteca.class
+gameshop/models/ConquistaJogo.class
 gameshop/ui/TelaPrincipal$4.class
 gameshop/ui/TelaLogin$3.class
 gameshop/models/Usuario.class
@@ -12,6 +14,7 @@ gameshop/models/JogoBibliotecaUsuario.class
 gameshop/ui/TelaPrincipal.class
 gameshop/ui/TelaLogin$2.class
 gameshop/ui/TelaPrincipal$1.class
+gameshop/models/DescricaoJogoCatalogo.class
 gameshop/ui/TelaPrincipal$5.class
 gameshop/models/Jogo.class
 gameshop/models/enums/EnumControle.class
