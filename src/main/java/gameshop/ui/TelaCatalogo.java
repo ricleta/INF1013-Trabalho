@@ -1,81 +1,32 @@
 package gameshop.ui;
 
 import gameshop.models.Usuario;
-import gameshop.models.JogoBibliotecaUsuario;
-import gameshop.models.JogoCarrinhoUsuario;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class TelaCatalogo extends JFrame {
+public class TelaCatalogo extends Tela {
 
-    private Usuario usuario;
     private Timer bannerTimer;
     private int currentBannerIndex = 0;
     private JLabel bannerLabel;
     private ImageIcon[] bannerImages;
 
     public TelaCatalogo(Usuario usuario) {
-        this.usuario = usuario;
+        super(usuario);
+
 
         // Configurações da janela
         setTitle("GameShop - Bem-vindo, " + usuario.getUsername());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // TODO Change to BoxLayout (vertical)
-        setLayout(new BorderLayout(0, 0));
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        // Painel superior (cabeçalho)
-        JPanel headerPanel = new JPanel();
-        headerPanel.setBackground(new Color(30, 30, 30));
-        headerPanel.setLayout(new BorderLayout(10, 10));
-        headerPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        JPanel headerPanel = setHeaderPanel();
 
-        // Barra de busca no cabeçalho
-        JPanel searchPanel = new JPanel();
-        searchPanel.setBackground(new Color(30, 30, 30));
-        JTextField searchField = new JTextField("Procurar jogo", 20);
-        searchField.setForeground(Color.GRAY);
-        searchPanel.add(searchField);
-        headerPanel.add(searchPanel, BorderLayout.WEST);
-
-        // Barra de menu
-        JMenuBar menuBar = new JMenuBar();
-        JMenu menuOpcoes = new JMenu("Opções");
-        JMenuItem menuItemMeuPerfil = new JMenuItem("Meu Perfil");
-        JMenuItem menuItemBiblioteca = new JMenuItem("Biblioteca");
-        JMenuItem menuItemContato = new JMenuItem("Contato");
-        JMenuItem menuItemSobre = new JMenuItem("Sobre a Plataforma");
-        JMenuItem menuItemPolitica = new JMenuItem("Política de Privacidade");
-        JMenuItem menuItemSuporte = new JMenuItem("Suporte");
-        JMenuItem menuItemOutros = new JMenuItem("Outros");
-
-        menuOpcoes.add(menuItemMeuPerfil);
-        menuOpcoes.add(menuItemBiblioteca);
-        menuOpcoes.add(menuItemContato);
-        menuOpcoes.add(menuItemSobre);
-        menuOpcoes.add(menuItemPolitica);
-        menuOpcoes.add(menuItemSuporte);
-        menuOpcoes.add(menuItemOutros);
-
-        menuBar.add(menuOpcoes);
-        setJMenuBar(menuBar);
-
-        // Ações dos itens de menu
-        menuItemBiblioteca.addActionListener(e -> exibirBiblioteca());
-        menuItemMeuPerfil.addActionListener(e -> System.out.println("Você acessou Meu Perfil"));
-        menuItemContato.addActionListener(e -> System.out.println("Você acessou Contato"));
-        menuItemSobre.addActionListener(e -> System.out.println("Você acessou Sobre a Plataforma"));
-        menuItemPolitica.addActionListener(e -> System.out.println("Você acessou Política de Privacidade"));
-        menuItemSuporte.addActionListener(e -> System.out.println("Você acessou Suporte"));
-        menuItemOutros.addActionListener(e -> System.out.println("Você acessou Outros"));
-        
-        headerPanel.add(new JPanel(), BorderLayout.EAST); // Placeholder para manter o layout
-
-        add(headerPanel, BorderLayout.NORTH);
+        mainPanel.add(headerPanel);
 
         // Painel do banner com slider
         JPanel bannerPanel = new JPanel();
@@ -122,7 +73,7 @@ public class TelaCatalogo extends JFrame {
         });
         bannerTimer.start();
 
-        add(bannerPanel, BorderLayout.CENTER);
+        mainPanel.add(bannerPanel);
 
         // Painel de jogos (catálogo)
         JPanel gamesPanel = new JPanel();
@@ -146,6 +97,8 @@ public class TelaCatalogo extends JFrame {
             JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
             infoPanel.setBackground(Color.LIGHT_GRAY);
 
+            JLabel nameLabel = new JLabel(gameNames[i]);
+
             JLabel discountLabel = new JLabel(discounts[i]);
             discountLabel.setForeground(Color.WHITE);
             discountLabel.setBackground(Color.GREEN);
@@ -155,6 +108,7 @@ public class TelaCatalogo extends JFrame {
             JLabel priceLabel = new JLabel(String.format("R$%.2f", prices[i]));
             priceLabel.setForeground(Color.WHITE);
 
+            infoPanel.add(nameLabel);
             infoPanel.add(discountLabel);
             infoPanel.add(priceLabel);
 
@@ -163,25 +117,10 @@ public class TelaCatalogo extends JFrame {
         }
 
         JScrollPane scrollPane = new JScrollPane(gamesPanel);
-        add(scrollPane, BorderLayout.SOUTH);
+        mainPanel.add(scrollPane);
+
+        add(mainPanel);
 
         pack();
-    }
-
-    private void exibirBiblioteca() {
-        StringBuilder mensagem = new StringBuilder("Biblioteca de " + usuario.getUsername() + ":\n");
-        for (JogoBibliotecaUsuario jogo : usuario.getBiblioteca()) {
-            mensagem.append(String.format("Jogo ID: %d, Horas: %.1f, Última jogada: %s, Favorito: %b\n",
-                    jogo.getIdJogo(), jogo.getHorasJogadas(), jogo.getUltimaDataJogado(), jogo.isFavorito()));
-        }
-        JOptionPane.showMessageDialog(this, mensagem.toString(), "Minha Biblioteca", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    private void exibirCarrinho() {
-        StringBuilder mensagem = new StringBuilder("Carrinho de " + usuario.getUsername() + ":\n");
-        for (JogoCarrinhoUsuario jogo : usuario.getCarrinhos()) {
-            mensagem.append(String.format("Jogo ID: %d, Preço: %.2f\n", jogo.getIdJogo(), jogo.getPreco()));
-        }
-        JOptionPane.showMessageDialog(this, mensagem.toString(), "Carrinho", JOptionPane.INFORMATION_MESSAGE);
     }
 }

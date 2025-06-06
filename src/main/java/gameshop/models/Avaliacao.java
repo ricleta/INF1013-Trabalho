@@ -1,10 +1,24 @@
 package gameshop.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Avaliacao {
+
+    @JsonProperty("id_jogo")
     private int idJogo;
+
+    @JsonProperty("id_usuario")
     private int idUsuario;
+
+    @JsonProperty("nota")
     private int nota;
+
+    @JsonProperty("texto")
     private String comentario;
+
+    public Avaliacao() {
+        // Construtor padrão necessário para a serialização/deserialização
+    }
 
     public Avaliacao(int idJogo, int idUsuario, int nota, String comentario) {
         this.idJogo = idJogo;

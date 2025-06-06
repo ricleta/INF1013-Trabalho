@@ -1,7 +1,10 @@
 package gameshop;
 
+import javax.swing.UIManager;
+import com.formdev.flatlaf.FlatDarculaLaf;
+
 import gameshop.models.Usuario;
-import gameshop.ui.TelaCatalogo;
+import gameshop.ui.*;
 import gameshop.models.*;
 
 import java.time.LocalDate;
@@ -10,14 +13,28 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        // Configura o Look and Feel para FlatLaf Darcula
+        try {
+            UIManager.setLookAndFeel(new FlatDarculaLaf());
+            UIManager.put("MenuItem.selectionBackground", UIManager.getColor("Button.background"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Usuario[] usuarios = JSONReader.readJSON("usuarios.json", Usuario[].class);
         final Usuario usuarioLogado = usuarios[0]; // Exemplo: usando o primeiro usuário do JSON
+
+        Jogo[] jogos = JSONReader.readJSON("jogos.json", Jogo[].class);
+        Jogo jogoExemplo = jogos[0]; // Exemplo: usando o primeiro jogo do JSON
 
         // Usuario usuarioLogado = createMockUsuario(); // Usando o mock de usuário para testes
         
         // Inicia a aplicação
-        TelaCatalogo telaCatalogo = new TelaCatalogo(usuarioLogado); // Exemplo: usando o primeiro usuário do JSON
-        telaCatalogo.setVisible(true);
+        // TelaCatalogo telaCatalogo = new TelaCatalogo(usuarioLogado); // Exemplo: usando o primeiro usuário do JSON
+        // telaCatalogo.setVisible(true);
+
+        TelaJogoCatalogo telaJogoCatalogo = new TelaJogoCatalogo(jogoExemplo, usuarioLogado);
+        telaJogoCatalogo.setVisible(true);
     }
 
     public static Usuario createMockUsuario() {
