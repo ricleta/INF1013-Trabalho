@@ -30,11 +30,8 @@ public class Main {
         // Usuario usuarioLogado = createMockUsuario(); // Usando o mock de usuário para testes
         
         // Inicia a aplicação
-        // TelaCatalogo telaCatalogo = new TelaCatalogo(usuarioLogado); // Exemplo: usando o primeiro usuário do JSON
-        // telaCatalogo.setVisible(true);
-
-        TelaJogoCatalogo telaJogoCatalogo = new TelaJogoCatalogo(jogoExemplo, usuarioLogado);
-        telaJogoCatalogo.setVisible(true);
+        TelaCatalogo telaCatalogo = new TelaCatalogo(usuarioLogado); // Exemplo: usando o primeiro usuário do JSON
+        telaCatalogo.setVisible(true);
     }
 
     public static Usuario createMockUsuario() {

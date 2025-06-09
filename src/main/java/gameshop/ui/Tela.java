@@ -1,12 +1,12 @@
 package gameshop.ui;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 import gameshop.models.JogoBibliotecaUsuario;
 import gameshop.models.JogoCarrinhoUsuario;
 import gameshop.models.Usuario;
-
-import java.awt.*;
 
 public class Tela extends JFrame{
     private Usuario usuario;
@@ -77,5 +77,19 @@ public class Tela extends JFrame{
             mensagem.append(String.format("Jogo ID: %d, Preço: %.2f\n", jogo.getIdJogo(), jogo.getPreco()));
         }
         JOptionPane.showMessageDialog(this, mensagem.toString(), "Carrinho", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    protected ImageIcon loadAndScaleImage(String resourcePath, String imageName, int width, int height) {
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(resourcePath));
+        if (imageIcon.getIconWidth() <= 0) {
+            // JOptionPane.showMessageDialog(null, "Imagem '" + imageName + "' não encontrada. Usando placeholder.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return new ImageIcon(new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB));
+        } else {
+            Image img = imageIcon.getImage();
+            Image scaledImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(scaledImg);
+            // JOptionPane.showMessageDialog(null, "Imagem '" + imageName + "' carregada com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            return scaledIcon;
+        }
     }
 }

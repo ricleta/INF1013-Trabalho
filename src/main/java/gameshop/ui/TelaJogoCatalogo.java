@@ -14,11 +14,14 @@ import javax.swing.border.TitledBorder;
 public class TelaJogoCatalogo extends Tela {
 
     private Jogo jogo; // Store the Jogo object
+
+    // Slider de imagens
     private Timer bannerTimer;
     private int currentBannerIndex = 0;
     private JLabel bannerLabel;
     private ImageIcon[] bannerImages;
 
+    // Slider de avaliacoes
     private Timer reviewTimer;
     private int currentReviewIndex = 0;
     private JLabel reviewLabel;
@@ -51,27 +54,12 @@ public class TelaJogoCatalogo extends Tela {
         // Placeholder banner images (replace with actual game images if available)
         bannerImages = new ImageIcon[3];
         try {
-            // Attempt to load some placeholder images or use a default one
-            bannerImages[0] = new ImageIcon(getClass().getResource("/placeholder_image1.png")); // Assuming images in src/main/resources
-            bannerImages[1] = new ImageIcon(getClass().getResource("/placeholder_image2.png"));
-            bannerImages[2] = new ImageIcon(getClass().getResource("/placeholder_image3.png"));
-            // Scale images if they are too large
-            for (int i = 0; i < bannerImages.length; i++) {
-                if (bannerImages[i].getIconWidth() > 0) { // Check if image was loaded
-                    Image img = bannerImages[i].getImage();
-                    Image scaledImg = img.getScaledInstance(800, 400, Image.SCALE_SMOOTH);
-                    bannerImages[i] = new ImageIcon(scaledImg);
-                } else {
-                    // Fallback if image not found, use a default placeholder or text
-                    bannerImages[i] = new ImageIcon(new BufferedImage(800, 400, BufferedImage.TYPE_INT_ARGB)); // Blank image
-                    // You could draw "No Image" text on this blank image if desired
-                }
-            }
+            bannerImages[0] = loadAndScaleImage("/Jogo_Zelda_Breath_of_the_Wild/Imagem_1.jpeg", "Imagem_1.jpeg", 800, 400);
+            bannerImages[1] = loadAndScaleImage("/Jogo_Zelda_Breath_of_the_Wild/Imagem_2.jpg", "Imagem_2.jpg", 800, 400);
+            bannerImages[2] = loadAndScaleImage("/Jogo_Zelda_Breath_of_the_Wild/Imagem_3.jpg", "Imagem_3.jpg", 800, 400);
         } catch (Exception e) {
-            System.err.println("Error loading banner images: " + e.getMessage());
-            // Fallback for bannerImages if loading fails
             for (int i = 0; i < bannerImages.length; i++) {
-                bannerImages[i] = new ImageIcon(); // Empty ImageIcon
+                bannerImages[i] = new ImageIcon(new BufferedImage(800, 400, BufferedImage.TYPE_INT_ARGB));
             }
         }
         
@@ -104,7 +92,6 @@ public class TelaJogoCatalogo extends Tela {
         });
         bannerTimer.start();
         mainPanel.add(imageSliderPanel);
-
 
         // 3. Game Details Panel (description on left, price/cart on right)
         JPanel detailsPanel = new JPanel();
@@ -220,7 +207,6 @@ public class TelaJogoCatalogo extends Tela {
         });
         reviewTimer.start();
         mainPanel.add(reviewSliderPanel);
-
 
         // Add mainPanel to the JFrame
         add(mainPanel);

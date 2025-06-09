@@ -1,9 +1,13 @@
 package gameshop.ui;
 
+import gameshop.models.Jogo;
 import gameshop.models.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaCatalogo extends Tela {
 
@@ -15,7 +19,6 @@ public class TelaCatalogo extends Tela {
     public TelaCatalogo(Usuario usuario) {
         super(usuario);
 
-
         // Configurações da janela
         setTitle("GameShop - Bem-vindo, " + usuario.getUsername());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -25,22 +28,28 @@ public class TelaCatalogo extends Tela {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         JPanel headerPanel = setHeaderPanel();
-
         mainPanel.add(headerPanel);
 
         // Painel do banner com slider
-        JPanel bannerPanel = new JPanel();
-        bannerPanel.setLayout(new BorderLayout());
-        bannerPanel.setBackground(Color.DARK_GRAY);
+        JPanel bannerSliderPanel = new JPanel();
+        bannerSliderPanel.setLayout(new BorderLayout());
+        bannerSliderPanel.setBackground(Color.DARK_GRAY);
+        bannerSliderPanel.setPreferredSize(new Dimension(1200, 400));
 
-        // Simulando imagens do banner
-        bannerImages = new ImageIcon[3];
-        for (int i = 0; i < 3; i++) {
-            bannerImages[i] = new ImageIcon(); // Placeholder para imagens
+        bannerImages = new ImageIcon[4];
+        try {
+            bannerImages[0] = loadAndScaleImage("/Banners_Catalogo/Banner_1.png", "Banner_1.png", 1200, 400);
+            bannerImages[1] = loadAndScaleImage("/Banners_Catalogo/Banner_2.jpg", "Banner_2.jpg", 1200, 400);
+            bannerImages[2] = loadAndScaleImage("/Banners_Catalogo/Banner_3.jpg", "Banner_3.jpg", 1200, 400);
+            bannerImages[3] = loadAndScaleImage("/Banners_Catalogo/Banner_4.jpg", "Banner_4.jpg", 1200, 400);
+        } catch (Exception e) {
+            for (int i = 0; i < bannerImages.length; i++) {
+                bannerImages[i] = new ImageIcon(new BufferedImage(1200, 400, BufferedImage.TYPE_INT_ARGB));
+            }
         }
 
         bannerLabel = new JLabel(bannerImages[currentBannerIndex], SwingConstants.CENTER);
-        bannerPanel.add(bannerLabel, BorderLayout.CENTER);
+        bannerSliderPanel.add(bannerLabel, BorderLayout.CENTER);
 
         // Botões de navegação do banner
         JButton prevButton = new JButton("<");
@@ -63,8 +72,8 @@ public class TelaCatalogo extends Tela {
             bannerTimer.restart();
         });
 
-        bannerPanel.add(prevButton, BorderLayout.WEST);
-        bannerPanel.add(nextButton, BorderLayout.EAST);
+        bannerSliderPanel.add(prevButton, BorderLayout.WEST);
+        bannerSliderPanel.add(nextButton, BorderLayout.EAST);
 
         // Timer para troca automática do banner (15 segundos)
         bannerTimer = new Timer(15000, e -> {
@@ -73,7 +82,7 @@ public class TelaCatalogo extends Tela {
         });
         bannerTimer.start();
 
-        mainPanel.add(bannerPanel);
+        mainPanel.add(bannerSliderPanel);
 
         // Painel de jogos (catálogo)
         JPanel gamesPanel = new JPanel();
@@ -82,7 +91,7 @@ public class TelaCatalogo extends Tela {
         gamesPanel.setBackground(Color.DARK_GRAY);
 
         // Dados simulados de jogos
-        String[] gameNames = {"Jogo 1", "Jogo 2", "Jogo 3", "Jogo 4", "Jogo 5", "Jogo 6", "Jogo 7", "Jogo 8", "Jogo 9"};
+        String[] gameNames = {"The Legend of Zelda: Breath of the Wild", "Jogo 2", "Jogo 3", "Jogo 4", "Jogo 5", "Jogo 6", "Jogo 7", "Jogo 8", "Jogo 9"};
         String[] discounts = {"-5%", "-10%", "-7%", "-8%", "-9%", "-18%", "-6%", "-5%", "-3%"};
         double[] prices = {59.99, 49.99, 39.99, 29.99, 19.99, 69.99, 44.99, 54.99, 34.99};
 
@@ -91,14 +100,22 @@ public class TelaCatalogo extends Tela {
             gameCard.setLayout(new BorderLayout());
             gameCard.setBackground(Color.DARK_GRAY);
 
-            JLabel gameImage = new JLabel(new ImageIcon()); // Placeholder para imagem do jogo
+            ImageIcon gameImageIcon = new ImageIcon();
+            if (i == 0) { // Primeiro slot
+                try {
+                    gameImageIcon = loadAndScaleImage("/Jogo_Zelda_Breath_of_the_Wild/Imagem_1.jpeg", "Imagem_1.jpeg", 320, 200);
+                } catch (Exception e) {
+                    gameImageIcon = new ImageIcon(new BufferedImage(320, 200, BufferedImage.TYPE_INT_ARGB));
+                }
+            }
+
+            JLabel gameImage = new JLabel(gameImageIcon);
             gameCard.add(gameImage, BorderLayout.CENTER);
 
             JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
             infoPanel.setBackground(Color.LIGHT_GRAY);
 
             JLabel nameLabel = new JLabel(gameNames[i]);
-
             JLabel discountLabel = new JLabel(discounts[i]);
             discountLabel.setForeground(Color.WHITE);
             discountLabel.setBackground(Color.GREEN);
@@ -113,6 +130,34 @@ public class TelaCatalogo extends Tela {
             infoPanel.add(priceLabel);
 
             gameCard.add(infoPanel, BorderLayout.SOUTH);
+
+            // Tornar o card clicável (apenas para o Zelda no índice 0) e mudar o cursor
+            if (i == 0) {
+                gameCard.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        // Redirecionar para TelaJogoCatalogo com o jogo Zelda
+                        Jogo jogoZelda = new Jogo(0, "The Legend of Zelda: Breath of the Wild", 
+                            new gameshop.models.enums.EnumPlataforma[] {gameshop.models.enums.EnumPlataforma.NINTENDO_SWITCH, gameshop.models.enums.EnumPlataforma.WII_U},
+                            new gameshop.models.enums.EnumControle[] {gameshop.models.enums.EnumControle.PS5, gameshop.models.enums.EnumControle.XBOX},
+                            new java.util.ArrayList<>());
+                        TelaJogoCatalogo telaJogo = new TelaJogoCatalogo(jogoZelda, usuario);
+                        telaJogo.setVisible(true);
+                        dispose(); // Fecha a tela atual
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        gameCard.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Muda para cursor de mão ao passar por cima
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        gameCard.setCursor(new Cursor(Cursor.DEFAULT_CURSOR)); // Volta para o cursor padrão ao sair
+                    }
+                });
+            }
+
             gamesPanel.add(gameCard);
         }
 
@@ -120,7 +165,6 @@ public class TelaCatalogo extends Tela {
         mainPanel.add(scrollPane);
 
         add(mainPanel);
-
         pack();
     }
 }
