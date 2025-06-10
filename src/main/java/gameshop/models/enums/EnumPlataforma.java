@@ -15,14 +15,9 @@ public enum EnumPlataforma {
         return nome;
     }
 
-    // Static factory method for Jackson deserialization from string name
-    @JsonCreator
-    public static EnumPlataforma fromNome(String nome) {
-        for (EnumPlataforma plataforma : EnumPlataforma.values()) {
-            if (plataforma.nome.equalsIgnoreCase(nome)) {
-                return plataforma;
-            }
-        }
-        throw new IllegalArgumentException("Plataforma '" + nome + "' não reconhecida.");
+    @Override
+    public String toString() {
+        return nome;
+
     }
 }

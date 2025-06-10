@@ -1,18 +1,45 @@
 package gameshop.models;
 
+// import gameshop.models.JogoBibliotecaUsuario;
+// import gameshop.models.JogoCarrinhoUsuario;
+
 import java.time.LocalDate;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Usuario {
+
+    @JsonProperty("id_usuario")
     private int idUsuario;
+
+    @JsonProperty("username")
     private String username;
+
+    @JsonProperty("email")
     private String email;
+
+    @JsonProperty("senha")
     private String senha;
+
+    @JsonProperty("data_nascimento")
     private LocalDate dataNascimento;
+
+    @JsonProperty("amigos")
     private List<Integer> amigos;
+
+    @JsonProperty("solicitacoes_pendentes")
     private List<Integer> solicitacoesPendentes;
+
+    @JsonProperty("biblioteca")
     private List<JogoBibliotecaUsuario> biblioteca;
+
+    @JsonProperty("carrinhos")
     private List<JogoCarrinhoUsuario> carrinhos;
+
+
+    public Usuario() {
+        // Construtor padrão
+    }
 
     // Construtor
     public Usuario(int idUsuario, String username, String email, String senha, LocalDate dataNascimento,

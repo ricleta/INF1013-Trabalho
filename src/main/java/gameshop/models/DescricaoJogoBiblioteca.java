@@ -1,52 +1,39 @@
 package gameshop.models;
 
+import gameshop.models.enums.EnumOS;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DescricaoJogoBiblioteca {
+
+    @JsonProperty("texto")
     private String texto;
 
-    @JsonProperty("iconce_path") // Maps JSON field name to Java field
+    @JsonProperty("icone_path")
     private String iconePath;
 
-    @JsonProperty("sis_ops") // Maps JSON field name to Java field
-    private List<String> sistemasOperacionais;
+    @JsonProperty("sis_ops")
+    private EnumOS[] sistemasOperacionais;
 
     public DescricaoJogoBiblioteca() {
-        this.sistemasOperacionais = new ArrayList<>();
     }
 
+    public DescricaoJogoBiblioteca(String texto, String iconePath, EnumOS[] sistemasOperacionais) {
+        this.texto = texto;
+        this.iconePath = iconePath;
+        this.sistemasOperacionais = sistemasOperacionais;
+    }
+
+    // Getters and Setters
     public String getTexto() {
         return texto;
-    }
-
-    public void setTexto(String texto) {
-        this.texto = texto;
     }
 
     public String getIconePath() {
         return iconePath;
     }
 
-    public void setIconePath(String iconePath) {
-        this.iconePath = iconePath;
-    }
-
-    public List<String> getSistemasOperacionais() {
+    public EnumOS[] getSistemasOperacionais() {
         return sistemasOperacionais;
-    }
-
-    public void setSistemasOperacionais(List<String> sistemasOperacionais) {
-        this.sistemasOperacionais = sistemasOperacionais;
-    }
-
-    @Override
-    public String toString() {
-        return "DescricaoJogoBiblioteca{" +
-               "texto='" + texto + '\'' +
-               ", iconePath='" + iconePath + '\'' +
-               ", sistemasOperacionais=" + sistemasOperacionais +
-               '}';
     }
 }

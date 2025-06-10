@@ -3,12 +3,27 @@ package gameshop.models;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class JogoBibliotecaUsuario {
+    @JsonProperty("id_jogo")
     private int idJogo;
+
+    @JsonProperty("horas_jogadas")
     private double horasJogadas;
+
+    @JsonProperty("ultima_data_jogado")
     private LocalDate ultimaDataJogado;
+
+    @JsonProperty("favorito")
     private boolean favorito;
+
+    @JsonProperty("id_conquistas")
     private List<Integer> idConquistas;
+
+    public JogoBibliotecaUsuario() {
+        // Construtor padrão
+    }
 
     public JogoBibliotecaUsuario(int idJogo, double horasJogadas, LocalDate ultimaDataJogado,
                           boolean favorito, List<Integer> idConquistas) {

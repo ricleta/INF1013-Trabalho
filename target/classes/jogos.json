@@ -1,30 +1,31 @@
 [
     {
+        "id": 1,
         "nome": "The Legend of Zelda: Breath of the Wild",
-        "plataformas": ["Nintendo Switch", "Wii U"],
-        "controles": ["PS5", "Xbox"],
+        "plataformas": ["NINTENDO_SWITCH", "WII_U"],
+        "controles": ["PS5", "XBOX"],
 
         "avaliacoes": ["avaliacao 1", "avaliacao 2", "avaliacao 3"],
         "descricao_biblioteca":
         [
             {
                 "texto": "Descricao Zelda",
-                "iconce_path": "https://example.com/zelda_icon.png",
-                "sis_ops": ["Windows", "Linux"]
+                "icone_path": "https://example.com/zelda_icon.png",
+                "sis_ops": ["WINDOWS", "LINUX"]
             }
         ],
         "descricao_catalogo":
         [
             {
                 "texto": "Descricao Zelda",
-                "iconce_path": "https://example.com/zelda_icon.png",
-                "controles": ["xbox"],
+                "icone_path": "https://example.com/zelda_icon.png",
+                "controles": ["XBOX"],
                 "fotos_slide": [
                     "https://example.com/zelda1.png",
                     "https://example.com/zelda2.png",
                     "https://example.com/zelda3.png"
                 ],
-                "sis_ops": ["Windows", "Linux"]
+                "sis_ops": ["WINDOWS", "LINUX"]
             }
         ],
         "conquistas":[
