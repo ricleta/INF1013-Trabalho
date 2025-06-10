@@ -31,8 +31,16 @@ public class Avaliacao {
         return idJogo;
     }
 
+    public void setIdJogo(int idJogo) {
+        this.idJogo = idJogo;
+    }
+
     public int getIdUsuario() {
         return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public int getNota() {
@@ -55,5 +63,15 @@ public class Avaliacao {
             throw new IllegalArgumentException("O comentário não pode ser vazio.");
         }
         this.comentario = comentario;
+    }
+
+    @Override
+    public String toString() {
+        return "Avaliacao{" +
+               "idJogo=" + idJogo +
+               ", idUsuario=" + idUsuario +
+               ", nota=" + nota +
+               ", comentario='" + comentario + '\'' +
+               '}';
     }
 }
