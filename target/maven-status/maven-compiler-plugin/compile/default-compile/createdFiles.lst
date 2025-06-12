@@ -1,9 +1,10 @@
 gameshop/ui/TelaCatalogo.class
-gameshop/ui/TelaCatalogo$1.class
 gameshop/models/enums/EnumPlataforma.class
+gameshop/ui/TelaCatalogo$1.class
 gameshop/models/enums/EnumOS.class
 gameshop/models/JogoCarrinhoUsuario.class
 gameshop/models/DescricaoJogoBiblioteca.class
+gameshop/models/ConquistaJogo.class
 gameshop/ui/Tela.class
 gameshop/ui/TelaJogoCatalogo.class
 gameshop/models/Usuario.class
@@ -11,7 +12,7 @@ gameshop/models/Avaliacao.class
 gameshop/models/JogoBibliotecaUsuario.class
 gameshop/models/DescricaoJogoCatalogo.class
 gameshop/models/Jogo.class
-gameshop/models/enums/EnumControle.class
 gameshop/models/Conquista.class
+gameshop/models/enums/EnumControle.class
 gameshop/Main.class
 gameshop/models/JSONReader.class

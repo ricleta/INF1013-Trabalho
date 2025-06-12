@@ -25,10 +25,10 @@
                 "id_conquistas": [1, 2]
             }
         ],
-        "carrinhos":
+        "carrinho":
         [
             {
-                "id_jogo": 1,
+                "id_jogo": 3,
                 "preco": 59.99
             },
             {

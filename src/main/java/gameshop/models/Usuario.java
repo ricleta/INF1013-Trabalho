@@ -33,8 +33,8 @@ public class Usuario {
     @JsonProperty("biblioteca")
     private List<JogoBibliotecaUsuario> biblioteca;
 
-    @JsonProperty("carrinhos")
-    private List<JogoCarrinhoUsuario> carrinhos;
+    @JsonProperty("carrinho")
+    private List<JogoCarrinhoUsuario> carrinho;
 
 
     public Usuario() {
@@ -44,7 +44,7 @@ public class Usuario {
     // Construtor
     public Usuario(int idUsuario, String username, String email, String senha, LocalDate dataNascimento,
                    List<Integer> amigos, List<Integer> solicitacoesPendentes,
-                   List<JogoBibliotecaUsuario> biblioteca, List<JogoCarrinhoUsuario> carrinhos) {
+                   List<JogoBibliotecaUsuario> biblioteca, List<JogoCarrinhoUsuario> carrinho) {
         this.idUsuario = idUsuario;
         this.username = username;
         this.email = email;
@@ -53,7 +53,7 @@ public class Usuario {
         this.amigos = amigos;
         this.solicitacoesPendentes = solicitacoesPendentes;
         this.biblioteca = biblioteca;
-        this.carrinhos = carrinhos;
+        this.carrinho = carrinho;
     }
 
     // Getters e Setters
@@ -121,11 +121,26 @@ public class Usuario {
         this.biblioteca = biblioteca;
     }
 
-    public List<JogoCarrinhoUsuario> getCarrinhos() {
-        return carrinhos;
+    public List<JogoCarrinhoUsuario> getCarrinho() {
+        return carrinho;
     }
 
-    public void setCarrinhos(List<JogoCarrinhoUsuario> carrinhos) {
-        this.carrinhos = carrinhos;
+    public void addJogoToCarrinho(JogoCarrinhoUsuario jogoCarrinho) {
+        if (this.carrinho != null && carrinho.stream().noneMatch(j -> j.getIdJogo() == jogoCarrinho.getIdJogo())) {
+            this.carrinho.add(jogoCarrinho);
+            return;
+        }
+
+        throw new IllegalArgumentException("Jogo já está no carrinho ou carrinho não foi inicializado.");
+    }
+    
+    public void removeJogoFromCarrinho(JogoCarrinhoUsuario jogoCarrinho) {
+        if (this.carrinho != null) {
+            this.carrinho.remove(jogoCarrinho);
+        }
+    }
+
+    public void setCarrinho(List<JogoCarrinhoUsuario> carrinho) {
+        this.carrinho = carrinho;
     }
 }

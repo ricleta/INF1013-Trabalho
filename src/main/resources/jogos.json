@@ -42,5 +42,92 @@
                 "dificuldade": "Comum"
             }
         ]
+    },
+    {
+        "id": 2,
+        "nome": "Super Mario Odyssey",
+        "plataformas": ["NINTENDO_SWITCH", "WII_U"],
+        "controles": ["PS5", "XBOX"],
+
+        "avaliacoes": ["avaliacao 1", "avaliacao 2", "avaliacao 3"],
+        "descricao_biblioteca":
+        [
+            {
+                "texto": "Descricao Mario",
+                "icone_path": "https://example.com/mario_icon.png",
+                "sis_ops": ["WINDOWS", "LINUX"]
+            }
+        ],
+        "descricao_catalogo":
+        [
+            {
+                "texto": "Descricao Mario",
+                "icone_path": "https://example.com/mario_icon.png",
+                "controles": ["XBOX"],
+                "fotos_slide": [
+                    "https://example.com/mario1.png",
+                    "https://example.com/mario2.png",
+                    "https://example.com/mario3.png"
+                ],
+                "sis_ops": ["WINDOWS", "LINUX"]
+            }
+        ],
+        "conquistas":[
+            {
+                "id_conquista": 1,
+                "conquista": "Coletar todas as Moedas",
+                "icone": "path",
+                "dificuldade": "Raro"
+            },
+            {
+                "id_conquista": 2,
+                "conquista": "Completar o jogo sem morrer",
+                "icone": "path",
+                "dificuldade": "Comum"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "nome": "The Witcher 3: Wild Hunt",
+        "plataformas": ["PC", "PS4", "XBOX_ONE"],
+        "controles": ["PS5", "XBOX"],
+        "avaliacoes": ["avaliacao 1", "avaliacao 2", "avaliacao 3"],
+        "descricao_biblioteca":
+        [
+            {
+                "texto": "Descricao Witcher",
+                "icone_path": "https://example.com/witcher_icon.png",
+                "sis_ops": ["WINDOWS", "LINUX"]
+            }
+        ],
+        "descricao_catalogo":
+        [
+            {
+                "texto": "Descricao Witcher",
+                "icone_path": "https://example.com/witcher_icon.png",
+                "controles": ["XBOX"],
+                "fotos_slide": [
+                    "https://example.com/witcher1.png",
+                    "https://example.com/witcher2.png",
+                    "https://example.com/witcher3.png"
+                ],
+                "sis_ops": ["WINDOWS", "LINUX"]
+            }
+        ],
+        "conquistas":[
+            {
+                "id_conquista": 1,
+                "conquista": "Completar todas as missões secundárias",
+                "icone": "path",
+                "dificuldade": "Raro"
+            },
+            {
+                "id_conquista": 2,
+                "conquista": "Derrotar o Dragão",
+                "icone": "path",
+                "dificuldade": "Comum"
+            }
+        ]
     }
 ]

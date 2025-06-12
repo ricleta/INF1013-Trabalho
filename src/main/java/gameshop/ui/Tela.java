@@ -3,13 +3,18 @@ package gameshop.ui;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Array;
 
+import java.util.List;
+
+import gameshop.Main;
+import gameshop.models.Jogo;
 import gameshop.models.JogoBibliotecaUsuario;
 import gameshop.models.JogoCarrinhoUsuario;
 import gameshop.models.Usuario;
 
 public class Tela extends JFrame{
-    private Usuario usuario;
+    protected Usuario usuario;
 
     public Tela(Usuario usuario) {
         this.usuario = usuario;
@@ -17,7 +22,7 @@ public class Tela extends JFrame{
 
     protected JPanel setHeaderPanel() {
                 JPanel headerPanel = new JPanel(new BorderLayout(10, 10)); // Use BorderLayout for internal arrangement
-        headerPanel.setBackground(new Color(30, 30, 30));
+ headerPanel.setBackground(new Color(30, 30, 30));
         headerPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
         headerPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
@@ -30,7 +35,7 @@ public class Tela extends JFrame{
         headerPanel.add(searchPanel);
 
         // Painel para os botões de menu
-        JPanel menuButtonsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+ JPanel menuButtonsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         menuButtonsPanel.setBackground(new Color(30, 30, 30));
 
         JButton btnMeuPerfil = new JButton("Meu Perfil");
@@ -41,6 +46,8 @@ public class Tela extends JFrame{
         JButton btnSuporte = new JButton("Suporte");
         JButton btnOutros = new JButton("Outros");
 
+        JButton btnCarrinho = new JButton(loadAndScaleImage("/icons/shopping_cart.png", "shopping_cart.png", 24, 24));
+
         menuButtonsPanel.add(btnMeuPerfil);
         menuButtonsPanel.add(btnBiblioteca);
         menuButtonsPanel.add(btnContato);
@@ -48,6 +55,7 @@ public class Tela extends JFrame{
         menuButtonsPanel.add(btnPolitica);
         menuButtonsPanel.add(btnSuporte);
         menuButtonsPanel.add(btnOutros);
+        menuButtonsPanel.add(btnCarrinho);
 
         btnBiblioteca.addActionListener(e -> exibirBiblioteca());
         btnMeuPerfil.addActionListener(e -> System.out.println("Você acessou Meu Perfil"));
@@ -56,6 +64,7 @@ public class Tela extends JFrame{
         btnPolitica.addActionListener(e -> System.out.println("Você acessou Política de Privacidade"));
         btnSuporte.addActionListener(e -> System.out.println("Você acessou Suporte"));
         btnOutros.addActionListener(e -> System.out.println("Você acessou Outros"));
+        btnCarrinho.addActionListener(e -> exibirCarrinho());
 
         headerPanel.add(menuButtonsPanel);
 
@@ -72,10 +81,27 @@ public class Tela extends JFrame{
     }
 
     private void exibirCarrinho() {
+        List<JogoCarrinhoUsuario> carrinhoUsuario = usuario.getCarrinho();
+
         StringBuilder mensagem = new StringBuilder("Carrinho de " + usuario.getUsername() + ":\n");
-        for (JogoCarrinhoUsuario jogo : usuario.getCarrinhos()) {
-            mensagem.append(String.format("Jogo ID: %d, Preço: %.2f\n", jogo.getIdJogo(), jogo.getPreco()));
+        if (carrinhoUsuario.isEmpty()) {
+            mensagem.append("Seu carrinho está vazio.");
+            JOptionPane.showMessageDialog(this, mensagem.toString(), "Carrinho", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
+
+        for (JogoCarrinhoUsuario jogoCarrinho : carrinhoUsuario) {
+            Jogo jogo = Main.getJogo(jogoCarrinho.getIdJogo());
+
+            if (jogo == null) {
+                mensagem.append(String.format("Jogo ID: %d (não encontrado)\n", jogoCarrinho.getIdJogo()));
+            }
+            else
+            {
+                mensagem.append(String.format("Jogo: %s, Preço: %.2f\n", jogo.getNome(), jogoCarrinho.getPreco()));
+            }
+        }
+
         JOptionPane.showMessageDialog(this, mensagem.toString(), "Carrinho", JOptionPane.INFORMATION_MESSAGE);
     }
 

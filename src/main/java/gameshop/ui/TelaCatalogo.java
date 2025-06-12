@@ -1,5 +1,6 @@
 package gameshop.ui;
 
+import gameshop.Main;
 import gameshop.models.Jogo;
 import gameshop.models.Usuario;
 
@@ -137,11 +138,8 @@ public class TelaCatalogo extends Tela {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         // Redirecionar para TelaJogoCatalogo com o jogo Zelda
-                        Jogo jogoZelda = new Jogo(0, "The Legend of Zelda: Breath of the Wild", 
-                            new gameshop.models.enums.EnumPlataforma[] {gameshop.models.enums.EnumPlataforma.NINTENDO_SWITCH, gameshop.models.enums.EnumPlataforma.WII_U},
-                            new gameshop.models.enums.EnumControle[] {gameshop.models.enums.EnumControle.PS5, gameshop.models.enums.EnumControle.XBOX},
-                            new java.util.ArrayList<>());
-                        TelaJogoCatalogo telaJogo = new TelaJogoCatalogo(jogoZelda, usuario);
+                        Jogo jogo = Main.getJogo(1);
+                        TelaJogoCatalogo telaJogo = new TelaJogoCatalogo(jogo, usuario);
                         telaJogo.setVisible(true);
                         dispose(); // Fecha a tela atual
                     }

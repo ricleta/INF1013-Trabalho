@@ -1,5 +1,6 @@
 package gameshop.ui;
 
+import gameshop.Main;
 import gameshop.models.Jogo;
 import gameshop.models.Usuario;
 
@@ -147,11 +148,7 @@ public class TelaJogoCatalogo extends Tela {
         addToCartButton.setForeground(Color.WHITE);
         addToCartButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         addToCartButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, addToCartButton.getPreferredSize().height)); // Make button fill width
-        addToCartButton.addActionListener(e -> {
-            // Logic to add game to cart
-            JOptionPane.showMessageDialog(this, "Jogo '" + jogo.getNome() + "' adicionado ao carrinho!", "Carrinho", JOptionPane.INFORMATION_MESSAGE);
-            // You'd typically call a method on the Usuario or a CartManager here
-        });
+        addToCartButton.addActionListener(e -> addGameToCart(jogo));
         purchasePanel.add(addToCartButton);
 
         detailsPanel.add(descriptionPanel);
@@ -223,5 +220,16 @@ public class TelaJogoCatalogo extends Tela {
         button.setFocusPainted(false); // Remove focus border
         button.setFont(new Font("Arial", Font.BOLD, 20));
         button.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Hand cursor on hover
+    }
+
+    private void addGameToCart(Jogo jogo) {
+        try {
+            Main.addJogoToCarrinho(usuario, jogo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao adicionar o jogo ao carrinho.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JOptionPane.showMessageDialog(this, "Jogo " + jogo.getNome() + " adicionado ao carrinho!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 }
