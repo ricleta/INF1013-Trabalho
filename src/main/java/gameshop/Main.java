@@ -10,6 +10,8 @@ import gameshop.models.*;
 public class Main {
     private static Jogo[] jogos;
     private static Usuario[] usuarios;
+    private static Catalogo[] catalogos;
+    private static Catalogo catalogoAtual;
 
     public static void main(String[] args) {
         // Configura o Look and Feel para FlatLaf Darcula
@@ -24,9 +26,9 @@ public class Main {
         final Usuario usuarioLogado = usuarios[0]; // Exemplo: usando o primeiro usuário do JSON
 
         jogos = JSONReader.readJSON("jogos.json", Jogo[].class);
-        Jogo jogoExemplo = jogos[0]; // Exemplo: usando o primeiro jogo do JSON
 
-        // Usuario usuarioLogado = createMockUsuario(); // Usando o mock de usuário para testes
+        catalogos = JSONReader.readJSON("catalogos.json", Catalogo[].class);
+        catalogoAtual = catalogos[0]; // Exemplo: usando o primeiro catálogo do JSON
         
         // Inicia a aplicação
         TelaCatalogo telaCatalogo = new TelaCatalogo(usuarioLogado); // Exemplo: usando o primeiro usuário do JSON
@@ -51,7 +53,41 @@ public class Main {
             throw new IllegalArgumentException("Jogo não pode ser nulo ao adicionar ao carrinho.");
         }
         // TODO: Preco deve ser obtido do Catalogo
-        JogoCarrinhoUsuario novoJogoCarrinho = new JogoCarrinhoUsuario(jogo.getId(), 22.99); 
+        double preco = catalogoAtual.getPrecoJogo(jogo.getId());
+        
+        if (preco < 0) {
+            throw new IllegalArgumentException("Jogo não encontrado no catálogo.");
+        }
+
+        JogoCarrinho novoJogoCarrinho = new JogoCarrinho(jogo.getId(), preco);
         usuario.addJogoToCarrinho(novoJogoCarrinho);
+    }
+
+    public static JogoCatalogo[] getJogosCatalogoAtual() {
+        return catalogoAtual.getJogosOferecidos();
+    }
+
+    public static double getPrecoJogoCatalogoAtual(int idJogo) {
+        return catalogoAtual.getPrecoJogo(idJogo);
+    }
+
+    public static void showCatalogo(Usuario usuario) {
+        TelaCatalogo telaCatalogo = new TelaCatalogo(usuario);
+        telaCatalogo.setVisible(true);
+    }
+
+    public static void showCarrinho(Usuario usuario) {
+        TelaCarrinho telaCarrinho = new TelaCarrinho(usuario);
+        telaCarrinho.setVisible(true);
+    }
+
+    public static String getUsernameFromID(int userId)
+    {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getIdUsuario() == userId) {
+                return usuario.getUsername();
+            }
+        }
+        throw new IllegalArgumentException("Usuário não encontrado com o ID: " + userId);
     }
 }

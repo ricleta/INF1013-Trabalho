@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class JogoBibliotecaUsuario {
+public class JogoBiblioteca {
     @JsonProperty("id_jogo")
     private int idJogo;
 
@@ -21,11 +21,11 @@ public class JogoBibliotecaUsuario {
     @JsonProperty("id_conquistas")
     private List<Integer> idConquistas;
 
-    public JogoBibliotecaUsuario() {
+    public JogoBiblioteca() {
         // Construtor padrão
     }
 
-    public JogoBibliotecaUsuario(int idJogo, double horasJogadas, LocalDate ultimaDataJogado,
+    public JogoBiblioteca(int idJogo, double horasJogadas, LocalDate ultimaDataJogado,
                           boolean favorito, List<Integer> idConquistas) {
         this.idJogo = idJogo;
         this.horasJogadas = horasJogadas;

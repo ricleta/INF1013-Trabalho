@@ -9,7 +9,7 @@
         "descricao_biblioteca":
         [
             {
-                "texto": "Descricao Zelda",
+                "texto": "Embarque em uma aventura de mundo aberto de tirar o fôlego em Hyrule, uma terra devastada pela calamidade. Como Link, você desperta após um sono de 100 anos para um mundo que não reconhece totalmente. Sua missão é recuperar suas memórias, dominar tecnologia antiga e utilizar o poder dos Campeões para derrotar Calamity Ganon antes que ele destrua o que resta do reino. Explore vastas paisagens, de montanhas imponentes e florestas exuberantes a desertos escaldantes e tundras congeladas. Resolva quebra-cabeças intrincados em santuários antigos, lute contra inimigos formidáveis com um sistema de combate dinâmico e colete recursos para cozinhar, criar itens e sobreviver. O destino de Hyrule está em suas mãos nesta obra-prima aclamada pela crítica.",
                 "icone_path": "https://example.com/zelda_icon.png",
                 "sis_ops": ["WINDOWS", "LINUX"]
             }
@@ -17,13 +17,13 @@
         "descricao_catalogo":
         [
             {
-                "texto": "Descricao Zelda",
+                "texto": "Embarque em uma aventura de mundo aberto de tirar o fôlego em Hyrule, uma terra devastada pela calamidade. Como Link, você desperta após um sono de 100 anos para um mundo que não reconhece totalmente. Sua missão é recuperar suas memórias, dominar tecnologia antiga e utilizar o poder dos Campeões para derrotar Calamity Ganon antes que ele destrua o que resta do reino. Explore vastas paisagens, de montanhas imponentes e florestas exuberantes a desertos escaldantes e tundras congeladas. Resolva quebra-cabeças intrincados em santuários antigos, lute contra inimigos formidáveis com um sistema de combate dinâmico e colete recursos para cozinhar, criar itens e sobreviver. O destino de Hyrule está em suas mãos nesta obra-prima aclamada pela crítica.",
                 "icone_path": "https://example.com/zelda_icon.png",
                 "controles": ["XBOX"],
                 "fotos_slide": [
-                    "https://example.com/zelda1.png",
-                    "https://example.com/zelda2.png",
-                    "https://example.com/zelda3.png"
+                    "/Jogo_Zelda_Breath_of_the_Wild/Imagem_1.jpeg",
+                    "/Jogo_Zelda_Breath_of_the_Wild/Imagem_2.jpg",
+                    "/Jogo_Zelda_Breath_of_the_Wild/Imagem_3.jpg"
                 ],
                 "sis_ops": ["WINDOWS", "LINUX"]
             }
@@ -65,9 +65,9 @@
                 "icone_path": "https://example.com/mario_icon.png",
                 "controles": ["XBOX"],
                 "fotos_slide": [
-                    "https://example.com/mario1.png",
-                    "https://example.com/mario2.png",
-                    "https://example.com/mario3.png"
+                    "/Jogo_Super_Mario_Odyssey/Imagem_1.jpg",
+                    "/Jogo_Super_Mario_Odyssey/Imagem_2.jpg",
+                    "/Jogo_Super_Mario_Odyssey/Imagem_3.jpg"
                 ],
                 "sis_ops": ["WINDOWS", "LINUX"]
             }
@@ -106,11 +106,11 @@
             {
                 "texto": "Descricao Witcher",
                 "icone_path": "https://example.com/witcher_icon.png",
-                "controles": ["XBOX"],
+                "controles": ["PS5", "XBOX"],
                 "fotos_slide": [
-                    "https://example.com/witcher1.png",
-                    "https://example.com/witcher2.png",
-                    "https://example.com/witcher3.png"
+                    "/Jogo_The_Witcher_3/Imagem_1.jpg",
+                    "/Jogo_The_Witcher_3/Imagem_2.jpg",
+                    "/Jogo_The_Witcher_3/Imagem_3.jpg"
                 ],
                 "sis_ops": ["WINDOWS", "LINUX"]
             }

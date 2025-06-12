@@ -8,14 +8,20 @@
             {
                 "id_jogo": 1,
                 "preco": 59.99,
-                "data_inicio": "2023-01-01",
-                "data_fim": "2023-01-31"
+                "data_inicio": "2025-05-10",
+                "data_fim": "2025-05-30"
             },
             {
                 "id_jogo": 1,
-                "preco": 59.99,
-                "data_inicio": "2023-02-01",
-                "data_fim": "2023-02-05"
+                "preco": 49.99,
+                "data_inicio": "2025-06-01",
+                "data_fim": "2025-07-05"
+            },
+            {
+                "id_jogo": 2,
+                "preco": 39.99,
+                "data_inicio": "2025-06-10",
+                "data_fim": "2025-07-01"
             }
         ]
     }

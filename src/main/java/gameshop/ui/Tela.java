@@ -9,20 +9,25 @@ import java.util.List;
 
 import gameshop.Main;
 import gameshop.models.Jogo;
-import gameshop.models.JogoBibliotecaUsuario;
-import gameshop.models.JogoCarrinhoUsuario;
+import gameshop.models.JogoBiblioteca;
+import gameshop.models.JogoCarrinho;
 import gameshop.models.Usuario;
 
 public class Tela extends JFrame{
     protected Usuario usuario;
+    private String tipoTela;
 
-    public Tela(Usuario usuario) {
+    public Tela(Usuario usuario, String tipoTela) {
         this.usuario = usuario;
+        this.tipoTela = tipoTela;
+
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // DISPOSE_ON_CLOSE to close only this window
+        setLocationRelativeTo(null); // Center the window        
     }
 
     protected JPanel setHeaderPanel() {
-                JPanel headerPanel = new JPanel(new BorderLayout(10, 10)); // Use BorderLayout for internal arrangement
- headerPanel.setBackground(new Color(30, 30, 30));
+        JPanel headerPanel = new JPanel(new BorderLayout(10, 10)); // Use BorderLayout for internal arrangement
+        headerPanel.setBackground(new Color(30, 30, 30));
         headerPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
         headerPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
@@ -35,37 +40,51 @@ public class Tela extends JFrame{
         headerPanel.add(searchPanel);
 
         // Painel para os botões de menu
- JPanel menuButtonsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        JPanel menuButtonsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         menuButtonsPanel.setBackground(new Color(30, 30, 30));
 
+
+        if (!tipoTela.equals("CATALOGO")) {
+            JButton btnLoja = new JButton("Loja");
+            menuButtonsPanel.add(btnLoja);
+            btnLoja.addActionListener(e -> irParaLoja());
+        }
+
         JButton btnMeuPerfil = new JButton("Meu Perfil");
-        JButton btnBiblioteca = new JButton("Biblioteca");
-        JButton btnContato = new JButton("Contato");
-        JButton btnSobre = new JButton("Sobre");
-        JButton btnPolitica = new JButton("Política");
-        JButton btnSuporte = new JButton("Suporte");
-        JButton btnOutros = new JButton("Outros");
-
-        JButton btnCarrinho = new JButton(loadAndScaleImage("/icons/shopping_cart.png", "shopping_cart.png", 24, 24));
-
         menuButtonsPanel.add(btnMeuPerfil);
-        menuButtonsPanel.add(btnBiblioteca);
-        menuButtonsPanel.add(btnContato);
-        menuButtonsPanel.add(btnSobre);
-        menuButtonsPanel.add(btnPolitica);
-        menuButtonsPanel.add(btnSuporte);
-        menuButtonsPanel.add(btnOutros);
-        menuButtonsPanel.add(btnCarrinho);
-
-        btnBiblioteca.addActionListener(e -> exibirBiblioteca());
         btnMeuPerfil.addActionListener(e -> System.out.println("Você acessou Meu Perfil"));
-        btnContato.addActionListener(e -> System.out.println("Você acessou Contato"));
-        btnSobre.addActionListener(e -> System.out.println("Você acessou Sobre a Plataforma"));
-        btnPolitica.addActionListener(e -> System.out.println("Você acessou Política de Privacidade"));
-        btnSuporte.addActionListener(e -> System.out.println("Você acessou Suporte"));
-        btnOutros.addActionListener(e -> System.out.println("Você acessou Outros"));
-        btnCarrinho.addActionListener(e -> exibirCarrinho());
 
+        JButton btnBiblioteca = new JButton("Biblioteca");
+        menuButtonsPanel.add(btnBiblioteca);
+        btnBiblioteca.addActionListener(e -> exibirBiblioteca());
+        
+        JButton btnContato = new JButton("Contato");
+        menuButtonsPanel.add(btnContato);
+        btnContato.addActionListener(e -> System.out.println("Você acessou Contato"));
+
+        JButton btnSobre = new JButton("Sobre");
+        menuButtonsPanel.add(btnSobre);
+        btnSobre.addActionListener(e -> System.out.println("Você acessou Sobre a Plataforma"));
+        
+        JButton btnPolitica = new JButton("Política");
+        menuButtonsPanel.add(btnPolitica);
+        btnPolitica.addActionListener(e -> System.out.println("Você acessou Política de Privacidade"));
+
+        JButton btnSuporte = new JButton("Suporte");
+        menuButtonsPanel.add(btnSuporte);        
+        btnSuporte.addActionListener(e -> System.out.println("Você acessou Suporte"));
+
+        JButton btnOutros = new JButton("Outros");
+        menuButtonsPanel.add(btnOutros);
+        btnOutros.addActionListener(e -> System.out.println("Você acessou Outros"));
+
+        if (!tipoTela.equals("CARRINHO"))
+        {
+            JButton btnCarrinho = new JButton(loadAndScaleImage("/icons/shopping_cart.png", 24, 24));
+            menuButtonsPanel.add(btnCarrinho);
+            btnCarrinho.addActionListener(e -> exibirCarrinho());
+        }
+        
         headerPanel.add(menuButtonsPanel);
 
         return headerPanel;
@@ -73,7 +92,7 @@ public class Tela extends JFrame{
 
     private void exibirBiblioteca() {
         StringBuilder mensagem = new StringBuilder("Biblioteca de " + usuario.getUsername() + ":\n");
-        for (JogoBibliotecaUsuario jogo : usuario.getBiblioteca()) {
+        for (JogoBiblioteca jogo : usuario.getBiblioteca()) {
             mensagem.append(String.format("Jogo ID: %d, Horas: %.1f, Última jogada: %s, Favorito: %b\n",
                     jogo.getIdJogo(), jogo.getHorasJogadas(), jogo.getUltimaDataJogado(), jogo.isFavorito()));
         }
@@ -81,31 +100,16 @@ public class Tela extends JFrame{
     }
 
     private void exibirCarrinho() {
-        List<JogoCarrinhoUsuario> carrinhoUsuario = usuario.getCarrinho();
-
-        StringBuilder mensagem = new StringBuilder("Carrinho de " + usuario.getUsername() + ":\n");
-        if (carrinhoUsuario.isEmpty()) {
-            mensagem.append("Seu carrinho está vazio.");
-            JOptionPane.showMessageDialog(this, mensagem.toString(), "Carrinho", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        for (JogoCarrinhoUsuario jogoCarrinho : carrinhoUsuario) {
-            Jogo jogo = Main.getJogo(jogoCarrinho.getIdJogo());
-
-            if (jogo == null) {
-                mensagem.append(String.format("Jogo ID: %d (não encontrado)\n", jogoCarrinho.getIdJogo()));
-            }
-            else
-            {
-                mensagem.append(String.format("Jogo: %s, Preço: %.2f\n", jogo.getNome(), jogoCarrinho.getPreco()));
-            }
-        }
-
-        JOptionPane.showMessageDialog(this, mensagem.toString(), "Carrinho", JOptionPane.INFORMATION_MESSAGE);
+        Main.showCarrinho(usuario);
+        this.dispose();
     }
 
-    protected ImageIcon loadAndScaleImage(String resourcePath, String imageName, int width, int height) {
+    protected void irParaLoja() {
+        Main.showCatalogo(usuario);
+        this.dispose();
+    }
+
+    protected ImageIcon loadAndScaleImage(String resourcePath, int width, int height) {
         ImageIcon imageIcon = new ImageIcon(getClass().getResource(resourcePath));
         if (imageIcon.getIconWidth() <= 0) {
             // JOptionPane.showMessageDialog(null, "Imagem '" + imageName + "' não encontrada. Usando placeholder.", "Aviso", JOptionPane.WARNING_MESSAGE);
