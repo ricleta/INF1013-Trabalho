@@ -149,7 +149,7 @@ public class TelaJogoCatalogo extends Tela {
         addToCartButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, addToCartButton.getPreferredSize().height)); // Make button fill width
         addToCartButton.addActionListener(e -> addGameToCart(jogo));
         purchasePanel.add(addToCartButton);
-
+        
         detailsPanel.add(descriptionPanel);
         detailsPanel.add(purchasePanel);
         mainPanel.add(detailsPanel);
@@ -227,6 +227,11 @@ public class TelaJogoCatalogo extends Tela {
     }
 
     private void addGameToCart(Jogo jogo) {
+        if (isJogoInCarrinho(jogo)) {
+            JOptionPane.showMessageDialog(this, "Jogo já está no carrinho.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         try {
             Main.addJogoToCarrinho(usuario, jogo);
         } catch (Exception e) {
@@ -236,4 +241,12 @@ public class TelaJogoCatalogo extends Tela {
 
         JOptionPane.showMessageDialog(this, "Jogo " + jogo.getNome() + " adicionado ao carrinho!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
+
+    private boolean isJogoInCarrinho(Jogo jogo) {
+        if (usuario.getCarrinho() == null) {
+            return false; // Carrinho não inicializado
+        }
+        return usuario.getCarrinho().stream().anyMatch(j -> j.getIdJogo() == jogo.getId());
+    }
+
 }

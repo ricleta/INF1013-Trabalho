@@ -121,6 +121,16 @@ public class Usuario {
         this.biblioteca = biblioteca;
     }
 
+    public void addJogoToBiblioteca(Jogo jogo) {
+        if (this.biblioteca != null && biblioteca.stream().noneMatch(j -> j.getIdJogo() == jogo.getId())) {
+            JogoBiblioteca novoJogoBiblioteca = new JogoBiblioteca(jogo.getId(), 0.0, null, false, null);
+            this.biblioteca.add(novoJogoBiblioteca);
+            return;
+        }
+
+        throw new IllegalArgumentException("Jogo já está na biblioteca ou biblioteca não foi inicializada.");
+    }
+
     public List<JogoCarrinho> getCarrinho() {
         return carrinho;
     }
@@ -140,7 +150,33 @@ public class Usuario {
         }
     }
 
+    public void removeJogoFromCarrinho(int idJogo) {
+        if (this.carrinho != null) {
+            this.carrinho.removeIf(j -> j.getIdJogo() == idJogo);
+        }
+    }
+
+    public void clearCarrinho() {
+        if (this.carrinho != null) {
+            this.carrinho.clear();
+        }
+    }
+
     public void setCarrinho(List<JogoCarrinho> carrinho) {
         this.carrinho = carrinho;
+    }
+
+    public boolean hasJogoInBiblioteca(Jogo jogo) {
+        if (biblioteca == null) {
+            return false; // Biblioteca não inicializada
+        }
+        return biblioteca.stream().anyMatch(j -> j.getIdJogo() == jogo.getId());
+    }
+
+    public boolean hasJogoInCarrinho(Jogo jogo) {
+        if (carrinho == null) {
+            return false; // Carrinho não inicializado
+        }
+        return carrinho.stream().anyMatch(j -> j.getIdJogo() == jogo.getId());
     }
 }

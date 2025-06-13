@@ -2,6 +2,7 @@
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/models/Usuario.java
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/models/DescricaoJogoBiblioteca.java
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/models/JogoCarrinho.java
+/mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/ui/TelaCompra.java
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/models/JogoCatalogo.java
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/models/Avaliacao.java
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/models/ConquistaJogo.java
@@ -9,6 +10,7 @@
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/models/DescricaoJogoCatalogo.java
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/models/JogoBiblioteca.java
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/models/enums/EnumOS.java
+/mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/models/JSONHandler.java
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/ui/TelaCatalogo.java
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/Main.java
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/models/Jogo.java
@@ -16,5 +18,4 @@
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/ui/TelaJogoCatalogo.java
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/models/enums/EnumPlataforma.java
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/models/Conquista.java
-/mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/models/JSONReader.java
 /mnt/c/Users/ricle/Desktop/Coisas do ric/Programas/PUC/Java/GameShop/INF1013-Trabalho/src/main/java/gameshop/ui/Tela.java

@@ -78,7 +78,7 @@ public class Tela extends JFrame{
         menuButtonsPanel.add(btnOutros);
         btnOutros.addActionListener(e -> System.out.println("Você acessou Outros"));
 
-        if (!tipoTela.equals("CARRINHO"))
+        if (!tipoTela.equals("CARRINHO") && !tipoTela.equals("COMPRA"))  // Exibir botão de carrinho apenas se não for a tela de carrinho ou compra
         {
             JButton btnCarrinho = new JButton(loadAndScaleImage("/icons/shopping_cart.png", 24, 24));
             menuButtonsPanel.add(btnCarrinho);

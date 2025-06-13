@@ -1,103 +1,79 @@
-[
-    {
-        "id_usuario": 1,
-        "username": "irineu",
-        "email": "blablabla@gmail.com",
-        "senha": "12345678",
-        "data_nascimento": "2000-01-01",
-        "amigos": [2, 3],
-        "solicitacoes_pendentes": [4, 5],
-
-        "biblioteca":
-        [
-            {
-                "id_jogo": 1,
-                "horas_jogadas": 10.2,
-                "ultima_data_jogado": "2023-01-01",
-                "favorito": true,
-                "id_conquistas": [1, 2, 3]
-            },
-            {
-                "id_jogo": 2,
-                "horas_jogadas": 5,
-                "ultima_data_jogado": "2023-02-01",
-                "favorito": false,
-                "id_conquistas": [1, 2]
-            }
-        ],
-        "carrinho":
-        [
-            {
-                "id_jogo": 3,
-                "preco": 59.99
-            },
-            {
-                "id_jogo": 2,
-                "preco": 49.99
-            }
-        ]
-    },
-    {
-        "id_usuario": 2,
-        "username": "maria",
-        "email": "blablabla@gmail.com",
-        "senha": "12345678",
-        "data_nascimento": "1995-05-15",
-        "amigos": [1],
-        "solicitacoes_pendentes": [4, 5],
-        "biblioteca":
-        [
-            {
-                "id_jogo": 1,
-                "horas_jogadas": 20.5,
-                "ultima_data_jogado": "2023-01-15",
-                "favorito": true,
-                "id_conquistas": [1, 2]
-            },
-            {
-                "id_jogo": 3,
-                "horas_jogadas": 15.0,
-                "ultima_data_jogado": "2023-03-01",
-                "favorito": false,
-                "id_conquistas": [1, 2, 3]
-            }
-        ],
-        "carrinho":
-        [
-
-        ]
-    },
-    {
-        "id_usuario": 3,
-        "username": "joao",
-        "email": "joao@gmail.com",
-        "senha": "12345678",
-        "data_nascimento": "1990-10-10",
-        "amigos": [1],
-        "solicitacoes_pendentes": [4, 5],
-        "biblioteca":
-        [
-            {
-                "id_jogo": 2,
-                "horas_jogadas": 30.0,
-                "ultima_data_jogado": "2023-02-20",
-                "favorito": true,
-                "id_conquistas": [1, 2, 3]
-            },
-            {
-                "id_jogo": 3,
-                "horas_jogadas": 25.0,
-                "ultima_data_jogado": "2023-03-10",
-                "favorito": false,
-                "id_conquistas": [1, 2]
-            }
-        ],
-        "carrinho":
-        [
-            {
-                "id_jogo": 1,
-                "preco": 39.99
-            }
-        ]
-    }
-]
+[ {
+  "id_usuario" : 1,
+  "username" : "irineu",
+  "email" : "blablabla@gmail.com",
+  "senha" : "12345678",
+  "data_nascimento" : [ 2000, 1, 1 ],
+  "amigos" : [ 2, 3 ],
+  "solicitacoes_pendentes" : [ 4, 5 ],
+  "biblioteca" : [ {
+    "id_jogo" : 1,
+    "horas_jogadas" : 10.2,
+    "ultima_data_jogado" : [ 2023, 1, 1 ],
+    "favorito" : true,
+    "id_conquistas" : [ 1, 2, 3 ]
+  }, {
+    "id_jogo" : 2,
+    "horas_jogadas" : 0.0,
+    "ultima_data_jogado" : null,
+    "favorito" : false,
+    "id_conquistas" : null
+  } ],
+  "carrinho" : [ {
+    "id_jogo" : 1,
+    "preco" : 49.99
+  } ]
+}, {
+  "id_usuario" : 2,
+  "username" : "maria",
+  "email" : "maria@gmail.com",
+  "senha" : "12345678",
+  "data_nascimento" : [ 1995, 5, 15 ],
+  "amigos" : [ 1 ],
+  "solicitacoes_pendentes" : [ 4, 5 ],
+  "biblioteca" : [ {
+    "id_jogo" : 1,
+    "horas_jogadas" : 20.5,
+    "ultima_data_jogado" : [ 2023, 1, 15 ],
+    "favorito" : true,
+    "id_conquistas" : [ 1, 2 ]
+  }, {
+    "id_jogo" : 3,
+    "horas_jogadas" : 15.0,
+    "ultima_data_jogado" : [ 2023, 3, 1 ],
+    "favorito" : false,
+    "id_conquistas" : [ 1, 2, 3 ]
+  }, {
+    "id_jogo" : 2,
+    "horas_jogadas" : 0.0,
+    "ultima_data_jogado" : null,
+    "favorito" : false,
+    "id_conquistas" : null
+  } ],
+  "carrinho" : [ ]
+}, {
+  "id_usuario" : 3,
+  "username" : "joao",
+  "email" : "joao@gmail.com",
+  "senha" : "12345678",
+  "data_nascimento" : [ 1990, 10, 10 ],
+  "amigos" : [ 1 ],
+  "solicitacoes_pendentes" : [ 4, 5 ],
+  "biblioteca" : [ {
+    "id_jogo" : 1,
+    "horas_jogadas" : 0.0,
+    "ultima_data_jogado" : null,
+    "favorito" : false,
+    "id_conquistas" : null
+  }, {
+    "id_jogo" : 3,
+    "horas_jogadas" : 0.0,
+    "ultima_data_jogado" : null,
+    "favorito" : false,
+    "id_conquistas" : null
+  } ],
+  "carrinho" : [ {
+    "id_jogo" : 2,
+    "preco" : 49.99
+  } ]
+} ]

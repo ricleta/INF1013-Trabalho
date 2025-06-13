@@ -3,6 +3,8 @@ package gameshop;
 import javax.swing.UIManager;
 import com.formdev.flatlaf.FlatDarculaLaf;
 
+import java.util.List;
+
 import gameshop.models.Usuario;
 import gameshop.ui.*;
 import gameshop.models.*;
@@ -22,12 +24,12 @@ public class Main {
             e.printStackTrace();
         }
 
-        usuarios = JSONReader.readJSON("usuarios.json", Usuario[].class);
+        usuarios = JSONHandler.readJSON("usuarios.json", Usuario[].class);
         final Usuario usuarioLogado = usuarios[0]; // Exemplo: usando o primeiro usuário do JSON
 
-        jogos = JSONReader.readJSON("jogos.json", Jogo[].class);
+        jogos = JSONHandler.readJSON("jogos.json", Jogo[].class);
 
-        catalogos = JSONReader.readJSON("catalogos.json", Catalogo[].class);
+        catalogos = JSONHandler.readJSON("catalogos.json", Catalogo[].class);
         catalogoAtual = catalogos[0]; // Exemplo: usando o primeiro catálogo do JSON
         
         // Inicia a aplicação
@@ -45,22 +47,22 @@ public class Main {
         return null; // Retorna null se o jogo não for encontrado
     }
 
-    public static void addJogoToCarrinho(Usuario usuario, Jogo jogo) {
-        if (usuario == null) {
-            throw new IllegalArgumentException("Usuário não pode ser nulo ao adicionar ao carrinho.");
+    public static Usuario getUsuario(int idUsuario) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getIdUsuario() == idUsuario) {
+                return usuario;
+            }
         }
-        if (jogo == null) {
-            throw new IllegalArgumentException("Jogo não pode ser nulo ao adicionar ao carrinho.");
-        }
-        // TODO: Preco deve ser obtido do Catalogo
-        double preco = catalogoAtual.getPrecoJogo(jogo.getId());
-        
-        if (preco < 0) {
-            throw new IllegalArgumentException("Jogo não encontrado no catálogo.");
-        }
+        return null; // Retorna null se o usuário não for encontrado
+    }
 
-        JogoCarrinho novoJogoCarrinho = new JogoCarrinho(jogo.getId(), preco);
-        usuario.addJogoToCarrinho(novoJogoCarrinho);
+    public static int getIdUsuario(String username) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getUsername().equals(username)) {
+                return usuario.getIdUsuario();
+            }
+        }
+        throw new IllegalArgumentException("Usuário não encontrado com o nome: " + username);
     }
 
     public static JogoCatalogo[] getJogosCatalogoAtual() {
@@ -76,9 +78,58 @@ public class Main {
         telaCatalogo.setVisible(true);
     }
 
+    public static void showCompra(Usuario usuario, int usuarioPresenteadoID) {
+        TelaCompra telaCompra = new TelaCompra(usuario, usuarioPresenteadoID);
+        telaCompra.setVisible(true);
+    }
+
+    public static void addJogoToBiblioteca(Usuario usuario, JogoCarrinho jogoCarrinho) {
+        if (usuario == null) {
+            throw new IllegalArgumentException("Usuário não pode ser nulo ao adicionar jogo à biblioteca.");
+        }
+
+        if (jogoCarrinho == null) {
+            throw new IllegalArgumentException("Carrinho não pode ser nulo ou vazio ao adicionar jogo à biblioteca.");
+        }
+
+        usuario.addJogoToBiblioteca(Main.getJogo(jogoCarrinho.getIdJogo()));
+    }
+
     public static void showCarrinho(Usuario usuario) {
         TelaCarrinho telaCarrinho = new TelaCarrinho(usuario);
         telaCarrinho.setVisible(true);
+    }
+
+    public static void addJogoToCarrinho(Usuario usuario, Jogo jogo) {
+        if (usuario == null) {
+            throw new IllegalArgumentException("Usuário não pode ser nulo ao adicionar ao carrinho.");
+        }
+        if (jogo == null) {
+            throw new IllegalArgumentException("Jogo não pode ser nulo ao adicionar ao carrinho.");
+        }
+
+        double preco = catalogoAtual.getPrecoJogo(jogo.getId());
+        
+        if (preco < 0) {
+            throw new IllegalArgumentException("Jogo não encontrado no catálogo.");
+        }
+
+        JogoCarrinho novoJogoCarrinho = new JogoCarrinho(jogo.getId(), preco);
+        usuario.addJogoToCarrinho(novoJogoCarrinho);
+        updateUsuarios();
+    }
+
+    public static void removeJogoFromCarrinho(Usuario usuario, JogoCarrinho jogoCarrinho) {
+        if (usuario == null || jogoCarrinho == null) {
+            throw new IllegalArgumentException("Usuário ou jogo não podem ser nulos ao remover do carrinho.");
+        }
+
+        usuario.removeJogoFromCarrinho(jogoCarrinho);
+        updateUsuarios();
+    }
+
+    public static void updateUsuarios() {
+        JSONHandler.writeJSON("usuarios.json", usuarios);
     }
 
     public static String getUsernameFromID(int userId)

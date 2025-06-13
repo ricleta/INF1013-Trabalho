@@ -53,7 +53,7 @@ public class TelaCarrinho extends Tela {
             throw new IllegalArgumentException("Usuário ou jogo não podem ser nulos ao remover do carrinho.");
         }
         
-        usuario.removeJogoFromCarrinho(jogoCarrinho);
+        Main.removeJogoFromCarrinho(usuario, jogoCarrinho);
         JOptionPane.showMessageDialog(this, "Jogo removido do carrinho com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -134,7 +134,8 @@ public class TelaCarrinho extends Tela {
         finalizarCompraButton.setMaximumSize(new Dimension(100, 50));
 
         // TODO: Implementar a lógica de finalização de compra
-        finalizarCompraButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Compra realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE));
+        // finalizarCompraButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Compra realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE));
+        finalizarCompraButton.addActionListener(e -> finalizarCompra(-1));
 
         if (totalCompra <= 0) {
             finalizarCompraButton.setEnabled(false); // Desabilita o botão se o total for zero ou negativo
@@ -174,7 +175,8 @@ public class TelaCarrinho extends Tela {
         presentearButton.addActionListener(e -> {
             String amigoSelecionado = (String) amigosDropdown.getSelectedItem();
             if (amigoSelecionado != null && !amigoSelecionado.equals("Selecione um amigo") && !amigoSelecionado.equals("Nenhum amigo disponível")) {
-                JOptionPane.showMessageDialog(this, "Compra realizada como presente para: " + amigoSelecionado, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                // JOptionPane.showMessageDialog(this, "Compra realizada como presente para: " + amigoSelecionado, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                finalizarCompra(Main.getIdUsuario(amigoSelecionado));
             } else {
                 JOptionPane.showMessageDialog(this, "Nenhum amigo selecionado.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
@@ -191,5 +193,10 @@ public class TelaCarrinho extends Tela {
         compraPanel.add(compraPresentePanel);
 
         return compraPanel;
+    }
+
+    private void finalizarCompra(int usuarioPresenteadoID) {
+        Main.showCompra(usuario, usuarioPresenteadoID);
+        dispose();
     }
 }
