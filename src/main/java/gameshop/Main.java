@@ -3,7 +3,7 @@ package gameshop;
 import javax.swing.UIManager;
 import com.formdev.flatlaf.FlatDarculaLaf;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import gameshop.models.Usuario;
 import gameshop.ui.*;
@@ -14,6 +14,7 @@ public class Main {
     private static Usuario[] usuarios;
     private static Catalogo[] catalogos;
     private static Catalogo catalogoAtual;
+    private static ArrayList<Compra> compras;
 
     public static void main(String[] args) {
         // Configura o Look and Feel para FlatLaf Darcula
@@ -31,7 +32,13 @@ public class Main {
 
         catalogos = JSONHandler.readJSON("catalogos.json", Catalogo[].class);
         catalogoAtual = catalogos[0]; // Exemplo: usando o primeiro catálogo do JSON
-        
+    
+        Compra[] storedCompras = JSONHandler.readJSON("compras.json", Compra[].class);
+        compras = new ArrayList<>();
+        for (Compra compra : storedCompras) {
+            compras.add(compra);
+        }
+
         // Inicia a aplicação
         TelaCatalogo telaCatalogo = new TelaCatalogo(usuarioLogado); // Exemplo: usando o primeiro usuário do JSON
         telaCatalogo.setVisible(true);
@@ -140,5 +147,10 @@ public class Main {
             }
         }
         throw new IllegalArgumentException("Usuário não encontrado com o ID: " + userId);
+    }
+
+    public static void storeCompra(Compra compra) {
+        compras.add(compra);
+        JSONHandler.writeJSON("compras.json", compras.toArray(new Compra[0]));
     }
 }

@@ -6,14 +6,26 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.time.LocalDateTime;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import gameshop.Main; // Import Main to access game data and payment methods
 import gameshop.models.JogoCarrinho;
 import gameshop.models.Usuario;
 import gameshop.models.Jogo;
+import gameshop.models.Compra;
+import gameshop.models.Pagamento;
+import gameshop.models.Cartao;
+
 import java.util.List;
+import java.util.ArrayList;
 
 public class TelaCompra extends Tela {
     private static final String TIPO_TELA = "COMPRA"; // Define a type for this screen
+    private double totalCompra;
 
     public TelaCompra(Usuario usuario, int usuarioPresenteadoID) {
         super(usuario, TIPO_TELA); // Pass the TIPO_TELA constant
@@ -48,11 +60,16 @@ public class TelaCompra extends Tela {
         paymentMethodPanel.add(paymentMethodLabel);
         paymentMethodPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Spacer
 
-        JComboBox<String> paymentMethodComboBox = new JComboBox<>(new String[]{
-                "Cartão de Crédito",
-                "Cartão de Débito",
-                "PIX",
-        });
+        ArrayList<String> paymentMethods = new ArrayList<>();
+
+        for (Cartao cartao : usuario.getCartoes()) {
+            paymentMethods.add(cartao.getSeguroNumero());
+        }
+
+        paymentMethods.add("PIX");
+
+        JComboBox<String> paymentMethodComboBox = new JComboBox<>(paymentMethods.toArray(new String[0]));
+        
         paymentMethodComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
         paymentMethodComboBox.setBackground(new Color(70, 70, 70));
         paymentMethodComboBox.setForeground(Color.WHITE);
@@ -73,7 +90,7 @@ public class TelaCompra extends Tela {
         ));
 
         // List of items
-        double totalCompra = 0;
+        totalCompra = 0;
         for (JogoCarrinho item : usuario.getCarrinho()) {
             JPanel itemPanel = new JPanel(new BorderLayout());
             itemPanel.setBackground(new Color(55, 55, 55));
@@ -121,11 +138,28 @@ public class TelaCompra extends Tela {
         buyButton.setAlignmentX(Component.RIGHT_ALIGNMENT); // Align button to the right
         buyButton.setMaximumSize(new Dimension(150, 40)); // Fixed size for the button
         buyButton.addActionListener(e -> {
+            LocalDateTime timestamp = LocalDateTime.now();
+            String metodo_usado = paymentMethodComboBox.getSelectedItem().toString();
+            String controlNum;
+            String idPagamento;
+            Pagamento pagamento;
+
             if (usuarioPresenteadoID > 0) {
-                realizarCompra(Main.getUsuario(usuarioPresenteadoID), usuario.getCarrinho());
+                Usuario presenteado = Main.getUsuario(usuarioPresenteadoID);
+
+                controlNum = generatePaymentControlNum(usuario, presenteado, metodo_usado, timestamp);
+                idPagamento = generatePaymentId(controlNum);
+                pagamento = new Pagamento(idPagamento, totalCompra, timestamp, metodo_usado, controlNum);
+
+                realizarCompra(presenteado, usuario.getCarrinho(), pagamento);
             } else {
                 // Regular purchase
-                realizarCompra(usuario);
+
+                controlNum = generatePaymentControlNum(usuario, null, metodo_usado, timestamp);
+                idPagamento = generatePaymentId(controlNum);
+                pagamento = new Pagamento(idPagamento, totalCompra, timestamp, metodo_usado, controlNum);
+                
+                realizarCompra(usuario, pagamento);
             }
         });
         
@@ -151,7 +185,7 @@ public class TelaCompra extends Tela {
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximizes the window
     }
 
-    private void realizarCompra(Usuario usuario) {
+    private void realizarCompra(Usuario usuario, Pagamento pagamento) {
         for (JogoCarrinho item : usuario.getCarrinho()) {
             Jogo jogo = Main.getJogo(item.getIdJogo());
 
@@ -164,13 +198,22 @@ public class TelaCompra extends Tela {
             Main.addJogoToBiblioteca(usuario, item);
         }
 
+        Compra compra = new Compra(
+            usuario.getIdUsuario(),
+            0,
+            usuario.getCarrinho(),
+            pagamento
+        );
+
+        Main.storeCompra(compra);
+
         usuario.clearCarrinho();
         Main.updateUsuarios();
         Main.showCatalogo(usuario); // Redirect to catalog screen after purchase
         dispose();
     }
 
-    private void realizarCompra(Usuario usuarioPresenteado, List<JogoCarrinho> carrinho) {
+    private void realizarCompra(Usuario usuarioPresenteado, List<JogoCarrinho> carrinho, Pagamento pagamento) {
         for (JogoCarrinho item : carrinho) {
             Jogo jogo = Main.getJogo(item.getIdJogo());
             if (usuarioPresenteado.hasJogoInBiblioteca(jogo))
@@ -189,9 +232,59 @@ public class TelaCompra extends Tela {
             JOptionPane.showMessageDialog(this, "Compra realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         }
 
+        Compra compra = new Compra(
+            usuario.getIdUsuario(),
+            usuarioPresenteado.getIdUsuario(),
+            carrinho,
+            pagamento
+        );
+
+        Main.storeCompra(compra);
+
         usuario.clearCarrinho();
         Main.updateUsuarios();
         Main.showCatalogo(usuario); // Redirect to catalog screen after purchase
         dispose();
+    }
+
+    private String generatePaymentControlNum(Usuario comprador, Usuario presenteado, String metodo, LocalDateTime timestamp)
+    {
+        long epoch = timestamp.toEpochSecond(java.time.ZoneOffset.UTC);
+        String metodoStr;
+        if (metodo.equals("PIX"))
+        {
+            metodoStr = "9999";
+        }
+        else
+        {
+            metodoStr = metodo.substring(metodo.length() - 4);
+        }
+
+        if (presenteado != null)
+        {
+
+            return String.format(comprador.getIdUsuario() + "-" + presenteado.getIdUsuario() + "-" + metodoStr + "-" + epoch);
+        }
+
+        return String.format(comprador.getIdUsuario() + "-" + metodoStr + "-" + epoch);
+    }
+
+    private String generatePaymentId(String controlNum)
+    {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(controlNum.getBytes(StandardCharsets.UTF_8));
+
+            StringBuilder hexString = new StringBuilder();
+            for (int i = 0; i < 4; i++)
+            {
+                hexString.append(String.format("%02x", 0xff & hash[i]));
+            }
+
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e)
+        {
+            throw new RuntimeException( "SHA-256 not supported", e);
+        }
     }
 }

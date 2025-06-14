@@ -1,8 +1,5 @@
 package gameshop.models;
 
-// import gameshop.models.JogoBibliotecaUsuario;
-// import gameshop.models.JogoCarrinhoUsuario;
-
 import java.time.LocalDate;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,6 +33,8 @@ public class Usuario {
     @JsonProperty("carrinho")
     private List<JogoCarrinho> carrinho;
 
+    @JsonProperty("cartoes")
+    private List<Cartao> cartoes;
 
     public Usuario() {
         // Construtor padrão
@@ -164,6 +163,10 @@ public class Usuario {
 
     public void setCarrinho(List<JogoCarrinho> carrinho) {
         this.carrinho = carrinho;
+    }
+
+    public List<Cartao> getCartoes() {
+        return cartoes;
     }
 
     public boolean hasJogoInBiblioteca(Jogo jogo) {
