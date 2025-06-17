@@ -5,9 +5,6 @@ import gameshop.models.enums.EnumPlataforma;
 import gameshop.models.enums.EnumControle;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Jogo {
     @JsonProperty("id")
@@ -74,6 +71,13 @@ public class Jogo {
 
     public ArrayList<String> getIdAvaliacoes() {
         return idAvaliacoes;
+    }
 
+    public DescricaoJogoCatalogo getDescricaoCatalogo() {
+        return descricaoCatalogo[0];
+    }
+
+    public DescricaoJogoBiblioteca getDescricaoBiblioteca() {
+        return descricaoBiblioteca[0];
     }
 }

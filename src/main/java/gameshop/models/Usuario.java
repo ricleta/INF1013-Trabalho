@@ -1,8 +1,5 @@
 package gameshop.models;
 
-// import gameshop.models.JogoBibliotecaUsuario;
-// import gameshop.models.JogoCarrinhoUsuario;
-
 import java.time.LocalDate;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,11 +28,13 @@ public class Usuario {
     private List<Integer> solicitacoesPendentes;
 
     @JsonProperty("biblioteca")
-    private List<JogoBibliotecaUsuario> biblioteca;
+    private List<JogoBiblioteca> biblioteca;
 
-    @JsonProperty("carrinhos")
-    private List<JogoCarrinhoUsuario> carrinhos;
+    @JsonProperty("carrinho")
+    private List<JogoCarrinho> carrinho;
 
+    @JsonProperty("cartoes")
+    private List<Cartao> cartoes;
 
     public Usuario() {
         // Construtor padrão
@@ -44,7 +43,7 @@ public class Usuario {
     // Construtor
     public Usuario(int idUsuario, String username, String email, String senha, LocalDate dataNascimento,
                    List<Integer> amigos, List<Integer> solicitacoesPendentes,
-                   List<JogoBibliotecaUsuario> biblioteca, List<JogoCarrinhoUsuario> carrinhos) {
+                   List<JogoBiblioteca> biblioteca, List<JogoCarrinho> carrinho) {
         this.idUsuario = idUsuario;
         this.username = username;
         this.email = email;
@@ -53,7 +52,7 @@ public class Usuario {
         this.amigos = amigos;
         this.solicitacoesPendentes = solicitacoesPendentes;
         this.biblioteca = biblioteca;
-        this.carrinhos = carrinhos;
+        this.carrinho = carrinho;
     }
 
     // Getters e Setters
@@ -113,19 +112,74 @@ public class Usuario {
         this.solicitacoesPendentes = solicitacoesPendentes;
     }
 
-    public List<JogoBibliotecaUsuario> getBiblioteca() {
+    public List<JogoBiblioteca> getBiblioteca() {
         return biblioteca;
     }
 
-    public void setBiblioteca(List<JogoBibliotecaUsuario> biblioteca) {
+    public void setBiblioteca(List<JogoBiblioteca> biblioteca) {
         this.biblioteca = biblioteca;
     }
 
-    public List<JogoCarrinhoUsuario> getCarrinhos() {
-        return carrinhos;
+    public void addJogoToBiblioteca(Jogo jogo) {
+        if (this.biblioteca != null && biblioteca.stream().noneMatch(j -> j.getIdJogo() == jogo.getId())) {
+            JogoBiblioteca novoJogoBiblioteca = new JogoBiblioteca(jogo.getId(), 0.0, null, false, null);
+            this.biblioteca.add(novoJogoBiblioteca);
+            return;
+        }
+
+        throw new IllegalArgumentException("Jogo já está na biblioteca ou biblioteca não foi inicializada.");
     }
 
-    public void setCarrinhos(List<JogoCarrinhoUsuario> carrinhos) {
-        this.carrinhos = carrinhos;
+    public List<JogoCarrinho> getCarrinho() {
+        return carrinho;
+    }
+
+    public void addJogoToCarrinho(JogoCarrinho jogoCarrinho) {
+        if (this.carrinho != null && carrinho.stream().noneMatch(j -> j.getIdJogo() == jogoCarrinho.getIdJogo())) {
+            this.carrinho.add(jogoCarrinho);
+            return;
+        }
+
+        throw new IllegalArgumentException("Jogo já está no carrinho ou carrinho não foi inicializado.");
+    }
+    
+    public void removeJogoFromCarrinho(JogoCarrinho jogoCarrinho) {
+        if (this.carrinho != null) {
+            this.carrinho.remove(jogoCarrinho);
+        }
+    }
+
+    public void removeJogoFromCarrinho(int idJogo) {
+        if (this.carrinho != null) {
+            this.carrinho.removeIf(j -> j.getIdJogo() == idJogo);
+        }
+    }
+
+    public void clearCarrinho() {
+        if (this.carrinho != null) {
+            this.carrinho.clear();
+        }
+    }
+
+    public void setCarrinho(List<JogoCarrinho> carrinho) {
+        this.carrinho = carrinho;
+    }
+
+    public List<Cartao> getCartoes() {
+        return cartoes;
+    }
+
+    public boolean hasJogoInBiblioteca(Jogo jogo) {
+        if (biblioteca == null) {
+            return false; // Biblioteca não inicializada
+        }
+        return biblioteca.stream().anyMatch(j -> j.getIdJogo() == jogo.getId());
+    }
+
+    public boolean hasJogoInCarrinho(Jogo jogo) {
+        if (carrinho == null) {
+            return false; // Carrinho não inicializado
+        }
+        return carrinho.stream().anyMatch(j -> j.getIdJogo() == jogo.getId());
     }
 }

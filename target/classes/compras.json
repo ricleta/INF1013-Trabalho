@@ -1,0 +1,40 @@
+[{
+  "id_usuario" : 1,
+  "id_presenteado" : 0,
+  "carrinho" : [ ],
+  "pagamento" : {
+    "identificacao_pagamento" : "56337869",
+    "total_a_pagar" : 29.99,
+    "numero_controle" : "1-3456-1749920594",
+    "timestamp" : [ 2025, 6, 14, 17, 3, 14, 754882700 ],
+    "metodo" : "**** **** **** 3456"
+  }
+}, {
+  "id_usuario" : 1,
+  "id_presenteado" : 0,
+  "carrinho" : [ {
+    "id_jogo" : 2,
+    "preco" : 39.99
+  } ],
+  "pagamento" : {
+    "identificacao_pagamento" : "b3a01068",
+    "total_a_pagar" : 39.99,
+    "numero_controle" : "1-3456-1749921404",
+    "timestamp" : [ 2025, 6, 14, 17, 16, 44, 620313200 ],
+    "metodo" : "**** **** **** 3456"
+  }
+}, {
+  "id_usuario" : 1,
+  "id_presenteado" : 3,
+  "carrinho" : [ {
+    "id_jogo" : 2,
+    "preco" : 39.99
+  } ],
+  "pagamento" : {
+    "identificacao_pagamento" : "9efffb3c",
+    "total_a_pagar" : 39.99,
+    "numero_controle" : "1-3-9999-1749921762",
+    "timestamp" : [ 2025, 6, 14, 17, 22, 42, 802753300 ],
+    "metodo" : "PIX"
+  }
+} ]

@@ -9,7 +9,7 @@
         "descricao_biblioteca":
         [
             {
-                "texto": "Descricao Zelda",
+                "texto": "Embarque em uma aventura de mundo aberto de tirar o fôlego em Hyrule, uma terra devastada pela calamidade. Como Link, você desperta após um sono de 100 anos para um mundo que não reconhece totalmente. Sua missão é recuperar suas memórias, dominar tecnologia antiga e utilizar o poder dos Campeões para derrotar Calamity Ganon antes que ele destrua o que resta do reino. Explore vastas paisagens, de montanhas imponentes e florestas exuberantes a desertos escaldantes e tundras congeladas. Resolva quebra-cabeças intrincados em santuários antigos, lute contra inimigos formidáveis com um sistema de combate dinâmico e colete recursos para cozinhar, criar itens e sobreviver. O destino de Hyrule está em suas mãos nesta obra-prima aclamada pela crítica.",
                 "icone_path": "https://example.com/zelda_icon.png",
                 "sis_ops": ["WINDOWS", "LINUX"]
             }
@@ -17,13 +17,13 @@
         "descricao_catalogo":
         [
             {
-                "texto": "Descricao Zelda",
+                "texto": "Embarque em uma aventura de mundo aberto de tirar o fôlego em Hyrule, uma terra devastada pela calamidade. Como Link, você desperta após um sono de 100 anos para um mundo que não reconhece totalmente. Sua missão é recuperar suas memórias, dominar tecnologia antiga e utilizar o poder dos Campeões para derrotar Calamity Ganon antes que ele destrua o que resta do reino. Explore vastas paisagens, de montanhas imponentes e florestas exuberantes a desertos escaldantes e tundras congeladas. Resolva quebra-cabeças intrincados em santuários antigos, lute contra inimigos formidáveis com um sistema de combate dinâmico e colete recursos para cozinhar, criar itens e sobreviver. O destino de Hyrule está em suas mãos nesta obra-prima aclamada pela crítica.",
                 "icone_path": "https://example.com/zelda_icon.png",
                 "controles": ["XBOX"],
                 "fotos_slide": [
-                    "https://example.com/zelda1.png",
-                    "https://example.com/zelda2.png",
-                    "https://example.com/zelda3.png"
+                    "/Jogo_Zelda_Breath_of_the_Wild/Imagem_1.jpeg",
+                    "/Jogo_Zelda_Breath_of_the_Wild/Imagem_2.jpg",
+                    "/Jogo_Zelda_Breath_of_the_Wild/Imagem_3.jpg"
                 ],
                 "sis_ops": ["WINDOWS", "LINUX"]
             }
@@ -38,6 +38,93 @@
             {
                 "id_conquista": 2,
                 "conquista": "Andar o mapa todo",
+                "icone": "path",
+                "dificuldade": "Comum"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "nome": "Super Mario Odyssey",
+        "plataformas": ["NINTENDO_SWITCH", "WII_U"],
+        "controles": ["PS5", "XBOX"],
+
+        "avaliacoes": ["avaliacao 1", "avaliacao 2", "avaliacao 3"],
+        "descricao_biblioteca":
+        [
+            {
+                "texto": "Descricao Mario",
+                "icone_path": "https://example.com/mario_icon.png",
+                "sis_ops": ["WINDOWS", "LINUX"]
+            }
+        ],
+        "descricao_catalogo":
+        [
+            {
+                "texto": "Descricao Mario",
+                "icone_path": "https://example.com/mario_icon.png",
+                "controles": ["XBOX"],
+                "fotos_slide": [
+                    "/Jogo_Super_Mario_Odyssey/Imagem_1.jpg",
+                    "/Jogo_Super_Mario_Odyssey/Imagem_2.jpg",
+                    "/Jogo_Super_Mario_Odyssey/Imagem_3.jpg"
+                ],
+                "sis_ops": ["WINDOWS", "LINUX"]
+            }
+        ],
+        "conquistas":[
+            {
+                "id_conquista": 1,
+                "conquista": "Coletar todas as Moedas",
+                "icone": "path",
+                "dificuldade": "Raro"
+            },
+            {
+                "id_conquista": 2,
+                "conquista": "Completar o jogo sem morrer",
+                "icone": "path",
+                "dificuldade": "Comum"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "nome": "The Witcher 3: Wild Hunt",
+        "plataformas": ["PC", "PS4", "XBOX_ONE"],
+        "controles": ["PS5", "XBOX"],
+        "avaliacoes": ["avaliacao 1", "avaliacao 2", "avaliacao 3"],
+        "descricao_biblioteca":
+        [
+            {
+                "texto": "Descricao Witcher",
+                "icone_path": "https://example.com/witcher_icon.png",
+                "sis_ops": ["WINDOWS", "LINUX"]
+            }
+        ],
+        "descricao_catalogo":
+        [
+            {
+                "texto": "Descricao Witcher",
+                "icone_path": "https://example.com/witcher_icon.png",
+                "controles": ["PS5", "XBOX"],
+                "fotos_slide": [
+                    "/Jogo_The_Witcher_3/Imagem_1.jpg",
+                    "/Jogo_The_Witcher_3/Imagem_2.jpg",
+                    "/Jogo_The_Witcher_3/Imagem_3.jpg"
+                ],
+                "sis_ops": ["WINDOWS", "LINUX"]
+            }
+        ],
+        "conquistas":[
+            {
+                "id_conquista": 1,
+                "conquista": "Completar todas as missões secundárias",
+                "icone": "path",
+                "dificuldade": "Raro"
+            },
+            {
+                "id_conquista": 2,
+                "conquista": "Derrotar o Dragão",
                 "icone": "path",
                 "dificuldade": "Comum"
             }
